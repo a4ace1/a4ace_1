@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -11,27 +11,37 @@
 </head>
 <body>
 
-  <!-- SCROLL PROGRESS BAR -->
+  <!-- SCROLL PROGRESS -->
   <div class="scroll-bar" id="scrollBar"></div>
 
   <!-- NAV -->
   <nav class="nav">
     <span class="nav-logo">ACE<span class="accent">.</span>BCA</span>
     <div class="nav-links">
+      <span class="nav-clock" id="navClock"></span>
       <a href="#semesters">Semesters</a>
+      <a href="#games">Games</a>
       <a href="#about">About</a>
       <button class="copy-link-btn" id="copyLinkBtn" title="Copy site link">🔗 Share</button>
+      <button class="theme-toggle" id="themeToggle" title="Toggle light/dark mode" aria-label="Toggle theme">☀</button>
       <a href="https://instagram.com/a4ace_1" target="_blank" class="nav-ig">Instagram ↗</a>
     </div>
+    <!-- Mobile nav -->
+    <button class="nav-hamburger" id="navHamburger" aria-label="Menu">☰</button>
   </nav>
+  <div class="nav-mobile-menu" id="navMobileMenu">
+    <a href="#semesters" class="nm-link">Semesters</a>
+    <a href="#games" class="nm-link">Games</a>
+    <a href="#about" class="nm-link">About</a>
+    <a href="https://instagram.com/a4ace_1" target="_blank" class="nm-link">Instagram ↗</a>
+  </div>
 
   <!-- HERO -->
   <section class="hero">
     <canvas class="hero-canvas" id="heroCanvas"></canvas>
-
     <div class="hero-tag">// BCA NOTES PORTAL · STUDENT RESOURCES</div>
     <h1 class="hero-title">
-      <span id="typedLine"></span><br />
+      <span id="typedLine"></span><span class="cursor-blink">|</span><br />
       <span class="hero-outline">Organized.</span><br />
       Accessible.
     </h1>
@@ -49,7 +59,7 @@
       <img src="ACE.JPEG" alt="S. Abubakar" class="profile-pic" />
       <div class="profile-info">
         <span class="profile-name">S. Abubakar</span>
-        <span class="profile-role">BCA · 2nd Semester</span>
+        <span class="profile-role">BCA · 2nd Sem</span>
       </div>
     </div>
   </section>
@@ -72,18 +82,9 @@
       </button>
       <div class="sem-content" id="sem1">
         <div class="resource-grid">
-          <a href="#" class="resource-card disabled">
-            <span class="rc-icon">📄</span>
-            <div class="rc-info"><span class="rc-title">Full Notes</span><span class="rc-sub">Not yet available</span></div>
-          </a>
-          <a href="#" class="resource-card disabled">
-            <span class="rc-icon">❓</span>
-            <div class="rc-info"><span class="rc-title">Important Questions</span><span class="rc-sub">Not yet available</span></div>
-          </a>
-          <a href="#" class="resource-card disabled">
-            <span class="rc-icon">🧪</span>
-            <div class="rc-info"><span class="rc-title">Lab Materials</span><span class="rc-sub">Not yet available</span></div>
-          </a>
+          <span class="resource-card disabled"><span class="rc-icon">📄</span><div class="rc-info"><span class="rc-title">Full Notes</span><span class="rc-sub">Not yet available</span></div></span>
+          <span class="resource-card disabled"><span class="rc-icon">❓</span><div class="rc-info"><span class="rc-title">Important Questions</span><span class="rc-sub">Not yet available</span></div></span>
+          <span class="resource-card disabled"><span class="rc-icon">🧪</span><div class="rc-info"><span class="rc-title">Lab Materials</span><span class="rc-sub">Not yet available</span></div></span>
         </div>
       </div>
     </div>
@@ -102,21 +103,36 @@
       </button>
       <div class="sem-content" id="sem2">
         <div class="resource-grid">
-          <a href="https://drive.google.com/drive/folders/1tTdPTlxSZUoxwMG5XDdi95KsIF-kfChb" target="_blank" class="resource-card must-read">
+          <a href="https://drive.google.com/drive/folders/1tTdPTlxSZUoxwMG5XDdi95KsIF-kfChb"
+             target="_blank" class="resource-card must-read"
+             data-modal="true"
+             data-title="Full Notes"
+             data-sem="Semester 2"
+             data-icon="📄"
+             data-desc="Complete lecture notes for all Semester 2 subjects — Data Structures, Additional English, Constitutional Values, EVS, and more."
+             data-tags="Data Structures,English,EVS,ConstitutionalValues,C++">
             <span class="rc-icon">📄</span>
-            <div class="rc-info">
-              <span class="rc-title">Full Notes <span class="hot-tag">🔥 Must Read</span></span>
-              <span class="rc-sub">Google Drive ↗</span>
-            </div>
+            <div class="rc-info"><span class="rc-title">Full Notes <span class="hot-tag">🔥</span></span><span class="rc-sub">Google Drive ↗</span></div>
           </a>
-          <a href="https://drive.google.com/drive/folders/1YSg2S32uwCUYaQ2fmH6jS9mTlrrCHk9h" target="_blank" class="resource-card must-read">
+          <a href="https://drive.google.com/drive/folders/1YSg2S32uwCUYaQ2fmH6jS9mTlrrCHk9h"
+             target="_blank" class="resource-card must-read"
+             data-modal="true"
+             data-title="Important Questions"
+             data-sem="Semester 2"
+             data-icon="❓"
+             data-desc="Curated question bank with model paper answers, 2-mark, 5-mark and 10-mark questions for exam preparation."
+             data-tags="ModelPaper,ExamPrep,QandA,ImportantTopics">
             <span class="rc-icon">❓</span>
-            <div class="rc-info">
-              <span class="rc-title">Important Questions <span class="hot-tag">🔥 Must Read</span></span>
-              <span class="rc-sub">Google Drive ↗</span>
-            </div>
+            <div class="rc-info"><span class="rc-title">Important Questions <span class="hot-tag">🔥</span></span><span class="rc-sub">Google Drive ↗</span></div>
           </a>
-          <a href="https://drive.google.com/drive/folders/1vYd3AjODfVJMLbtTXOelM4kLT3a6TjVT" target="_blank" class="resource-card">
+          <a href="https://drive.google.com/drive/folders/1vYd3AjODfVJMLbtTXOelM4kLT3a6TjVT"
+             target="_blank" class="resource-card"
+             data-modal="true"
+             data-title="Lab Materials"
+             data-sem="Semester 2"
+             data-icon="🧪"
+             data-desc="Practical lab programs and exercises for Semester 2. Includes C++ programs, Data Structure implementations, and more."
+             data-tags="C++,Practicals,Lab,Programs">
             <span class="rc-icon">🧪</span>
             <div class="rc-info"><span class="rc-title">Lab Materials</span><span class="rc-sub">Google Drive ↗</span></div>
           </a>
@@ -127,21 +143,12 @@
     <!-- SEM 3 -->
     <div class="sem-block">
       <button class="sem-header" aria-expanded="false" data-target="sem3">
-        <div class="sem-header-left">
-          <span class="sem-num">03</span>
-          <span class="sem-title">Semester 3</span>
-        </div>
-        <div class="sem-header-right">
-          <span class="badge badge-dim">Uploading soon</span>
-          <span class="chevron">›</span>
-        </div>
+        <div class="sem-header-left"><span class="sem-num">03</span><span class="sem-title">Semester 3</span></div>
+        <div class="sem-header-right"><span class="badge badge-dim">Uploading soon</span><span class="chevron">›</span></div>
       </button>
       <div class="sem-content" id="sem3">
         <div class="resource-grid">
-          <a href="#" class="resource-card disabled">
-            <span class="rc-icon">📄</span>
-            <div class="rc-info"><span class="rc-title">Full Notes</span><span class="rc-sub">Not yet available</span></div>
-          </a>
+          <span class="resource-card disabled"><span class="rc-icon">📄</span><div class="rc-info"><span class="rc-title">Full Notes</span><span class="rc-sub">Not yet available</span></div></span>
         </div>
       </div>
     </div>
@@ -149,21 +156,12 @@
     <!-- SEM 4 -->
     <div class="sem-block">
       <button class="sem-header" aria-expanded="false" data-target="sem4">
-        <div class="sem-header-left">
-          <span class="sem-num">04</span>
-          <span class="sem-title">Semester 4</span>
-        </div>
-        <div class="sem-header-right">
-          <span class="badge badge-dim">Uploading soon</span>
-          <span class="chevron">›</span>
-        </div>
+        <div class="sem-header-left"><span class="sem-num">04</span><span class="sem-title">Semester 4</span></div>
+        <div class="sem-header-right"><span class="badge badge-dim">Uploading soon</span><span class="chevron">›</span></div>
       </button>
       <div class="sem-content" id="sem4">
         <div class="resource-grid">
-          <a href="#" class="resource-card disabled">
-            <span class="rc-icon">📄</span>
-            <div class="rc-info"><span class="rc-title">Full Notes</span><span class="rc-sub">Not yet available</span></div>
-          </a>
+          <span class="resource-card disabled"><span class="rc-icon">📄</span><div class="rc-info"><span class="rc-title">Full Notes</span><span class="rc-sub">Not yet available</span></div></span>
         </div>
       </div>
     </div>
@@ -171,21 +169,12 @@
     <!-- SEM 5 -->
     <div class="sem-block">
       <button class="sem-header" aria-expanded="false" data-target="sem5">
-        <div class="sem-header-left">
-          <span class="sem-num">05</span>
-          <span class="sem-title">Semester 5</span>
-        </div>
-        <div class="sem-header-right">
-          <span class="badge badge-dim">Uploading soon</span>
-          <span class="chevron">›</span>
-        </div>
+        <div class="sem-header-left"><span class="sem-num">05</span><span class="sem-title">Semester 5</span></div>
+        <div class="sem-header-right"><span class="badge badge-dim">Uploading soon</span><span class="chevron">›</span></div>
       </button>
       <div class="sem-content" id="sem5">
         <div class="resource-grid">
-          <a href="#" class="resource-card disabled">
-            <span class="rc-icon">📄</span>
-            <div class="rc-info"><span class="rc-title">Full Notes</span><span class="rc-sub">Not yet available</span></div>
-          </a>
+          <span class="resource-card disabled"><span class="rc-icon">📄</span><div class="rc-info"><span class="rc-title">Full Notes</span><span class="rc-sub">Not yet available</span></div></span>
         </div>
       </div>
     </div>
@@ -193,26 +182,64 @@
     <!-- SEM 6 -->
     <div class="sem-block">
       <button class="sem-header" aria-expanded="false" data-target="sem6">
-        <div class="sem-header-left">
-          <span class="sem-num">06</span>
-          <span class="sem-title">Semester 6</span>
-        </div>
-        <div class="sem-header-right">
-          <span class="badge badge-dim">Uploading soon</span>
-          <span class="chevron">›</span>
-        </div>
+        <div class="sem-header-left"><span class="sem-num">06</span><span class="sem-title">Semester 6</span></div>
+        <div class="sem-header-right"><span class="badge badge-dim">Uploading soon</span><span class="chevron">›</span></div>
       </button>
       <div class="sem-content" id="sem6">
         <div class="resource-grid">
-          <a href="#" class="resource-card disabled">
-            <span class="rc-icon">📄</span>
-            <div class="rc-info"><span class="rc-title">Full Notes</span><span class="rc-sub">Not yet available</span></div>
-          </a>
+          <span class="resource-card disabled"><span class="rc-icon">📄</span><div class="rc-info"><span class="rc-title">Full Notes</span><span class="rc-sub">Not yet available</span></div></span>
         </div>
       </div>
     </div>
 
   </main>
+
+  <!-- GAMES SECTION -->
+  <section class="container" id="games">
+    <div class="section-label">// GAMES</div>
+    <div class="games-grid">
+
+      <!-- Typing Speed Test -->
+      <div class="game-card">
+        <div class="game-card-header">
+          <span class="game-title">⌨ Typing Speed Test</span>
+          <span class="game-sub">BCA-themed sentences · 30 seconds</span>
+        </div>
+        <div class="typing-stats">
+          <div class="tstat"><span class="tstat-val" id="wpmVal">--</span><span class="tstat-label">WPM</span></div>
+          <div class="tstat"><span class="tstat-val" id="accVal">--</span><span class="tstat-label">ACC%</span></div>
+          <div class="tstat"><span class="tstat-val" id="timeVal">30</span><span class="tstat-label">SEC</span></div>
+        </div>
+        <div class="typing-display" id="typingDisplay"></div>
+        <input type="text" class="typing-input" id="typingInput" placeholder="Click here to start typing..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+        <div class="game-footer-row">
+          <button class="game-btn" id="typingReset">↺ New Sentence</button>
+          <span class="typing-status" id="typingStatus">timer starts on first keystroke</span>
+        </div>
+      </div>
+
+      <!-- BCA Quiz -->
+      <div class="game-card">
+        <div class="game-card-header">
+          <span class="game-title">🧠 BCA Quiz</span>
+          <span class="game-sub">DS · OS · C++ · Networking · DBMS</span>
+        </div>
+        <div class="quiz-meta-row">
+          <span class="quiz-score-badge" id="quizScore">Score: 0 / 0</span>
+          <span class="quiz-qnum" id="quizQNum">Q — / 10</span>
+        </div>
+        <div class="quiz-question" id="quizQuestion">Hit Start to test your BCA knowledge.</div>
+        <div class="quiz-options" id="quizOptions"></div>
+        <div class="quiz-feedback" id="quizFeedback"></div>
+        <div class="game-footer-row">
+          <button class="game-btn" id="quizStart">▶ Start Quiz</button>
+          <button class="game-btn" id="quizNext" style="display:none">Next →</button>
+          <button class="game-btn game-btn-ghost" id="quizRestart" style="display:none">↺ Restart</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
 
   <!-- ABOUT -->
   <section class="about-section container" id="about">
@@ -220,13 +247,13 @@
     <div class="about-grid">
       <div class="about-text">
         <p>This portal exists because BCA notes are scattered across WhatsApp groups, random PDFs, and broken links. Built by a student, for students — everything in one place, no login required.</p>
-        <p>Maintained by <strong>S. Abubakar</strong> — 2nd Semester BCA student, Bengaluru.</p>
+        <p>Maintained by <strong>S. Abubakar</strong>, BCA 2nd Semester, Bengaluru.</p>
         <a href="https://instagram.com/a4ace_1" target="_blank" class="ig-link">📸 @a4ace_1 on Instagram</a>
       </div>
       <div class="about-quote">
         <blockquote>
-          "Share your knowledge. It is a way to achieve immortality."
-          <cite>— Dalai Lama XIV</cite>
+          "The man who moves a mountain begins by carrying away small stones."
+          <cite>— Confucius</cite>
         </blockquote>
       </div>
     </div>
@@ -243,12 +270,25 @@
 
   <!-- MUSIC PLAYER -->
   <div class="music-player" id="musicPlayer">
-    <button class="music-btn" id="music-btn" aria-label="Toggle music">
-      <span id="music-icon">▶</span>
-    </button>
+    <button class="music-btn" id="music-btn" aria-label="Toggle music"><span id="music-icon">▶</span></button>
     <span class="music-label" id="music-label">Play BGM</span>
     <div class="music-bar" id="musicBar">
       <span></span><span></span><span></span><span></span>
+    </div>
+  </div>
+
+  <!-- RESOURCE MODAL -->
+  <div class="modal-overlay" id="modalOverlay" role="dialog" aria-modal="true">
+    <div class="modal">
+      <button class="modal-close" id="modalClose" aria-label="Close">✕</button>
+      <div class="modal-eyebrow" id="modalEyebrow">SEMESTER 2 · LIVE</div>
+      <div class="modal-top">
+        <span class="modal-icon-big" id="modalIcon">📄</span>
+        <div class="modal-title" id="modalTitle">Full Notes</div>
+      </div>
+      <div class="modal-desc" id="modalDesc"></div>
+      <div class="modal-tags" id="modalTags"></div>
+      <a class="modal-cta" id="modalCta" href="#" target="_blank" rel="noopener">Open in Google Drive ↗</a>
     </div>
   </div>
 
@@ -258,7 +298,6 @@
   <audio id="bg-music" loop>
     <source src="music.mp3" type="audio/mpeg" />
   </audio>
-
   <script src="script.js"></script>
 </body>
 </html>
