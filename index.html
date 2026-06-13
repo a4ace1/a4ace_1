@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="BCA Notes Portal by S. Abubakar — all six semesters, one place. Free notes, no login required." />
+  <title>BCA Notes Portal — S. Abubakar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- SCROLL PROGRESS BAR -->
+  <div class="scroll-bar" id="scrollBar"></div>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <span class="nav-logo">ACE<span class="accent">.</span>BCA</span>
+    <div class="nav-links">
+      <a href="#semesters">Semesters</a>
+      <a href="#about">About</a>
+      <button class="copy-link-btn" id="copyLinkBtn" title="Copy site link">🔗 Share</button>
+      <a href="https://instagram.com/a4ace_1" target="_blank" class="nav-ig">Instagram ↗</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <canvas class="hero-canvas" id="heroCanvas"></canvas>
+
+    <div class="hero-tag">// BCA NOTES PORTAL · STUDENT RESOURCES</div>
+    <h1 class="hero-title">
+      <span id="typedLine"></span><br />
+      <span class="hero-outline">Organized.</span><br />
+      Accessible.
+    </h1>
+    <p class="hero-sub">
+      All six semesters. One place. No login, no paywall — just the notes you need to pass.
+    </p>
+    <div class="hero-meta">
+      <span class="badge badge-live">● SEM 2 LIVE</span>
+      <span class="badge badge-dim">SEM 1 · 3–6 COMING</span>
+      <span class="badge badge-visitors" id="visitorBadge">👁 counting...</span>
+    </div>
+    <a href="#semesters" class="hero-cta">Browse Semesters ↓</a>
+
+    <div class="hero-profile">
+      <img src="ACE.JPEG" alt="S. Abubakar" class="profile-pic" />
+      <div class="profile-info">
+        <span class="profile-name">S. Abubakar</span>
+        <span class="profile-role">BCA · 2nd Semester</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEMESTERS -->
+  <main class="container" id="semesters">
+    <div class="section-label">// SEMESTERS</div>
+
+    <!-- SEM 1 -->
+    <div class="sem-block">
+      <button class="sem-header" aria-expanded="false" data-target="sem1">
+        <div class="sem-header-left">
+          <span class="sem-num">01</span>
+          <span class="sem-title">Semester 1</span>
+        </div>
+        <div class="sem-header-right">
+          <span class="badge badge-dim">Uploading soon</span>
+          <span class="chevron">›</span>
+        </div>
+      </button>
+      <div class="sem-content" id="sem1">
+        <div class="resource-grid">
+          <a href="#" class="resource-card disabled">
+            <span class="rc-icon">📄</span>
+            <div class="rc-info"><span class="rc-title">Full Notes</span><span class="rc-sub">Not yet available</span></div>
+          </a>
+          <a href="#" class="resource-card disabled">
+            <span class="rc-icon">❓</span>
+            <div class="rc-info"><span class="rc-title">Important Questions</span><span class="rc-sub">Not yet available</span></div>
+          </a>
+          <a href="#" class="resource-card disabled">
+            <span class="rc-icon">🧪</span>
+            <div class="rc-info"><span class="rc-title">Lab Materials</span><span class="rc-sub">Not yet available</span></div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- SEM 2 -->
+    <div class="sem-block sem-active">
+      <button class="sem-header" aria-expanded="false" data-target="sem2">
+        <div class="sem-header-left">
+          <span class="sem-num accent">02</span>
+          <span class="sem-title">Semester 2</span>
+        </div>
+        <div class="sem-header-right">
+          <span class="badge badge-live">● Live</span>
+          <span class="chevron">›</span>
+        </div>
+      </button>
+      <div class="sem-content" id="sem2">
+        <div class="resource-grid">
+          <a href="https://drive.google.com/drive/folders/1tTdPTlxSZUoxwMG5XDdi95KsIF-kfChb" target="_blank" class="resource-card must-read">
+            <span class="rc-icon">📄</span>
+            <div class="rc-info">
+              <span class="rc-title">Full Notes <span class="hot-tag">🔥 Must Read</span></span>
+              <span class="rc-sub">Google Drive ↗</span>
+            </div>
+          </a>
+          <a href="https://drive.google.com/drive/folders/1YSg2S32uwCUYaQ2fmH6jS9mTlrrCHk9h" target="_blank" class="resource-card must-read">
+            <span class="rc-icon">❓</span>
+            <div class="rc-info">
+              <span class="rc-title">Important Questions <span class="hot-tag">🔥 Must Read</span></span>
+              <span class="rc-sub">Google Drive ↗</span>
+            </div>
+          </a>
+          <a href="https://drive.google.com/drive/folders/1vYd3AjODfVJMLbtTXOelM4kLT3a6TjVT" target="_blank" class="resource-card">
+            <span class="rc-icon">🧪</span>
+            <div class="rc-info"><span class="rc-title">Lab Materials</span><span class="rc-sub">Google Drive ↗</span></div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- SEM 3 -->
+    <div class="sem-block">
+      <button class="sem-header" aria-expanded="false" data-target="sem3">
+        <div class="sem-header-left">
+          <span class="sem-num">03</span>
+          <span class="sem-title">Semester 3</span>
+        </div>
+        <div class="sem-header-right">
+          <span class="badge badge-dim">Uploading soon</span>
+          <span class="chevron">›</span>
+        </div>
+      </button>
+      <div class="sem-content" id="sem3">
+        <div class="resource-grid">
+          <a href="#" class="resource-card disabled">
+            <span class="rc-icon">📄</span>
+            <div class="rc-info"><span class="rc-title">Full Notes</span><span class="rc-sub">Not yet available</span></div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- SEM 4 -->
+    <div class="sem-block">
+      <button class="sem-header" aria-expanded="false" data-target="sem4">
+        <div class="sem-header-left">
+          <span class="sem-num">04</span>
+          <span class="sem-title">Semester 4</span>
+        </div>
+        <div class="sem-header-right">
+          <span class="badge badge-dim">Uploading soon</span>
+          <span class="chevron">›</span>
+        </div>
+      </button>
+      <div class="sem-content" id="sem4">
+        <div class="resource-grid">
+          <a href="#" class="resource-card disabled">
+            <span class="rc-icon">📄</span>
+            <div class="rc-info"><span class="rc-title">Full Notes</span><span class="rc-sub">Not yet available</span></div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- SEM 5 -->
+    <div class="sem-block">
+      <button class="sem-header" aria-expanded="false" data-target="sem5">
+        <div class="sem-header-left">
+          <span class="sem-num">05</span>
+          <span class="sem-title">Semester 5</span>
+        </div>
+        <div class="sem-header-right">
+          <span class="badge badge-dim">Uploading soon</span>
+          <span class="chevron">›</span>
+        </div>
+      </button>
+      <div class="sem-content" id="sem5">
+        <div class="resource-grid">
+          <a href="#" class="resource-card disabled">
+            <span class="rc-icon">📄</span>
+            <div class="rc-info"><span class="rc-title">Full Notes</span><span class="rc-sub">Not yet available</span></div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- SEM 6 -->
+    <div class="sem-block">
+      <button class="sem-header" aria-expanded="false" data-target="sem6">
+        <div class="sem-header-left">
+          <span class="sem-num">06</span>
+          <span class="sem-title">Semester 6</span>
+        </div>
+        <div class="sem-header-right">
+          <span class="badge badge-dim">Uploading soon</span>
+          <span class="chevron">›</span>
+        </div>
+      </button>
+      <div class="sem-content" id="sem6">
+        <div class="resource-grid">
+          <a href="#" class="resource-card disabled">
+            <span class="rc-icon">📄</span>
+            <div class="rc-info"><span class="rc-title">Full Notes</span><span class="rc-sub">Not yet available</span></div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ABOUT -->
+  <section class="about-section container" id="about">
+    <div class="section-label">// ABOUT</div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>This portal exists because BCA notes are scattered across WhatsApp groups, random PDFs, and broken links. Built by a student, for students — everything in one place, no login required.</p>
+        <p>Maintained by <strong>S. Abubakar</strong> — 2nd Semester BCA student, Bengaluru.</p>
+        <a href="https://instagram.com/a4ace_1" target="_blank" class="ig-link">📸 @a4ace_1 on Instagram</a>
+      </div>
+      <div class="about-quote">
+        <blockquote>
+          "Share your knowledge. It is a way to achieve immortality."
+          <cite>— Dalai Lama XIV</cite>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <span>© 2026 S. Abubakar</span>
+    <span class="footer-divider">·</span>
+    <span>BCA Notes Portal</span>
+    <span class="footer-divider">·</span>
+    <span>Bengaluru</span>
+  </footer>
+
+  <!-- MUSIC PLAYER -->
+  <div class="music-player" id="musicPlayer">
+    <button class="music-btn" id="music-btn" aria-label="Toggle music">
+      <span id="music-icon">▶</span>
+    </button>
+    <span class="music-label" id="music-label">Play BGM</span>
+    <div class="music-bar" id="musicBar">
+      <span></span><span></span><span></span><span></span>
+    </div>
+  </div>
+
+  <!-- COPY TOAST -->
+  <div class="copy-toast" id="copyToast">🔗 Link copied!</div>
+
+  <audio id="bg-music" loop>
+    <source src="music.mp3" type="audio/mpeg" />
+  </audio>
+
+  <script src="script.js"></script>
+</body>
+</html>
