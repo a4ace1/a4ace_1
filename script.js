@@ -300,7 +300,46 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
   /* ══════════════════════════════════════════════
-     12. TYPING SPEED GAME
+     12. HERO BACKGROUND VIDEO — graceful fallback
+     If background.mp4 fails to load/decode/play, hide the
+     <video> element so the existing dark gradient background
+     (body::before + .hero::before/::after) shows through
+     the glass layer instead.
+  ══════════════════════════════════════════════ */
+  var heroVideo = document.getElementById("heroVideo");
+
+  if (heroVideo) {
+    var hideHeroVideo = function () {
+      heroVideo.classList.add("video-fallback");
+    };
+
+    // Fires if the <source> 404s or the format is unsupported
+    heroVideo.addEventListener("error", hideHeroVideo, true);
+
+    // Fires if loading stalls indefinitely (e.g. network issue)
+    heroVideo.addEventListener("stalled", function () {
+      if (heroVideo.readyState === 0) hideHeroVideo();
+    });
+
+    // Some mobile browsers block autoplay even when muted;
+    // catch that and fall back gracefully too.
+    var playAttempt = heroVideo.play();
+    if (playAttempt && typeof playAttempt.catch === "function") {
+      playAttempt.catch(hideHeroVideo);
+    }
+
+    // Respect reduced-motion / reduced-data preferences
+    var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var reduceData   = window.matchMedia("(prefers-reduced-data: reduce)").matches;
+    if (reduceMotion || reduceData) {
+      heroVideo.pause();
+      hideHeroVideo();
+    }
+  }
+
+
+  /* ══════════════════════════════════════════════
+     13. TYPING SPEED GAME
   ══════════════════════════════════════════════ */
   var SENTENCES = [
     "A stack follows the Last In First Out principle and is used in recursive algorithms.",
@@ -431,7 +470,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
   /* ══════════════════════════════════════════════
-     13. BCA QUIZ GAME
+     14. BCA QUIZ GAME
   ══════════════════════════════════════════════ */
   var QUESTIONS = [
     {
