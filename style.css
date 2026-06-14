@@ -25,6 +25,11 @@
   --modal-bg:    rgba(0, 0, 0, 0.70);
   --glass-blur:  blur(20px);
   --glass-blur-heavy: blur(32px);
+
+  /* Hero video / glass tuning */
+  --hero-video-opacity:      0.75;
+  --hero-glass-tint:         rgba(6, 6, 12, 0.55);
+  --hero-glass-blur:         3px;
 }
 
 /* ── Light Mode ── */
@@ -42,6 +47,10 @@
   --muted:       rgba(0, 0, 0, 0.42);
   --shadow:      rgba(0, 0, 0, 0.12);
   --modal-bg:    rgba(180, 180, 200, 0.50);
+
+  --hero-video-opacity: 0.65;
+  --hero-glass-tint:    rgba(238, 240, 246, 0.55);
+  --hero-glass-blur:    3px;
 }
 
 [data-theme="light"] .hero-canvas    { opacity: 0.30; }
@@ -272,9 +281,10 @@ body::before {
   border-bottom: 0.5px solid var(--border);
   position:   relative;
   overflow:   hidden;
+  isolation:  isolate; /* contain blending/stacking of video+glass layers */
 }
 
-/* Ambient glows */
+/* Ambient glows (sit above video/glass, below content — purely decorative) */
 .hero::before {
   content:        '';
   position:       absolute;
@@ -282,6 +292,7 @@ body::before {
   width:          520px;  height: 520px;
   background:     radial-gradient(circle, rgba(220, 20, 60, 0.09) 0%, transparent 68%);
   pointer-events: none;
+  z-index:        2;
 }
 .hero::after {
   content:        '';
@@ -290,6 +301,51 @@ body::before {
   width:          360px;  height: 360px;
   background:     radial-gradient(circle, rgba(100, 20, 200, 0.07) 0%, transparent 68%);
   pointer-events: none;
+  z-index:        2;
+}
+
+/* ============================================================
+   HERO BACKGROUND VIDEO + GLASSMORPHISM LAYER
+   Stacking order inside .hero:
+     0  hero-video   (raw looping footage)
+     0  hero-glass   (frosted glass over the video)
+     2  ::before/::after ambient glows
+     1  hero-canvas  (particle network)
+     2  hero-body    (all readable UI content)
+============================================================ */
+.hero-video {
+  position:       absolute;
+  inset:          0;
+  width:          100%;
+  height:         100%;
+  object-fit:     cover;
+  object-position: center;
+  transform:      scale(1.06);
+  opacity:        var(--hero-video-opacity);
+  z-index:        0;
+  pointer-events: none;
+  filter:         saturate(1.15) contrast(1.05);
+  transition:     opacity 0.4s ease;
+}
+
+/* If the video fails to load/play, hide it gracefully —
+   the existing dark gradient background (body::before, .hero::before/after)
+   takes over automatically. */
+.hero-video.video-fallback { display: none; }
+
+/* Frosted glass overlay — sits directly above the video */
+.hero-glass {
+  position:        absolute;
+  inset:           0;
+  z-index:         0;
+  background:
+    radial-gradient(ellipse 80% 50% at 20% 10%, rgba(100, 20, 180, 0.10) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 60% at 80% 80%, rgba(220, 20, 60, 0.12) 0%, transparent 60%),
+    var(--hero-glass-tint);
+  backdrop-filter:          blur(var(--hero-glass-blur)) saturate(130%);
+  -webkit-backdrop-filter:  blur(var(--hero-glass-blur)) saturate(130%);
+  border-bottom:   0.5px solid rgba(255,255,255,0.05);
+  pointer-events:  none;
 }
 
 .hero-canvas {
@@ -298,13 +354,13 @@ body::before {
   width:          100%;
   height:         100%;
   pointer-events: none;
-  z-index:        0;
+  z-index:        1;
 }
 
 /* Two-column flex: content left, profile right */
 .hero-body {
   position:    relative;
-  z-index:     1;
+  z-index:     2;
   display:     flex;
   align-items: flex-end;
   justify-content: space-between;
@@ -342,6 +398,7 @@ body::before {
   line-height:    1.05;          /* was 0.94 — caused overlap */
   letter-spacing: -2px;
   margin-bottom:  28px;
+  text-shadow:    0 2px 24px rgba(0,0,0,0.55);
 }
 
 /* Each line is a block */
@@ -377,6 +434,7 @@ body::before {
   max-width:     480px;
   line-height:   1.85;
   margin-bottom: 28px;
+  text-shadow:   0 1px 12px rgba(0,0,0,0.45);
 }
 
 /* Badges */
@@ -1096,6 +1154,10 @@ body::before {
   .hero::before  { width: 260px; height: 260px; top: -60px; right: -30px; }
   .hero::after   { display: none; }
 
+  /* Lighten the blur cost on mobile GPUs */
+  .hero-glass    { backdrop-filter: blur(2px) saturate(120%); -webkit-backdrop-filter: blur(2px) saturate(120%); }
+  .hero-video    { opacity: calc(var(--hero-video-opacity) * 0.95); }
+
   .container     { padding: 0 20px; }
 
   .resource-grid { grid-template-columns: 1fr; }
@@ -1109,7 +1171,7 @@ body::before {
 }
 
 /* ============================================================
-   REDUCED MOTION
+   REDUCED MOTION / DATA SAVING
 ============================================================ */
 @media (prefers-reduced-motion: reduce) {
   .music-bar span,
@@ -1122,4 +1184,11 @@ body::before {
   .resource-card:not(.disabled):hover,
   .hero-cta, .modal-cta,
   .game-btn                         { transform: none !important; }
+
+  /* Hide the moving video entirely; glass + ambient glows remain */
+  .hero-video { display: none !important; }
+}
+
+@media (prefers-reduced-data: reduce) {
+  .hero-video { display: none !important; }
 }
