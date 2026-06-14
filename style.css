@@ -278,10 +278,43 @@ body::before {
 ============================================================ */
 .hero {
   padding:    60px 48px 64px;
-  border-bottom: 0.5px solid var(--border);
   position:   relative;
   overflow:   hidden;
   isolation:  isolate; /* contain blending/stacking of video+glass layers */
+}
+
+/* Stylish glowing divider beneath the hero, separating it from the rest of the page */
+.hero-divider {
+  position:   relative;
+  height:     2px;
+  z-index:    1;
+  background: linear-gradient(
+                90deg,
+                transparent 0%,
+                rgba(220, 20, 60, 0.05) 15%,
+                rgba(220, 20, 60, 0.75) 50%,
+                rgba(220, 20, 60, 0.05) 85%,
+                transparent 100%
+              );
+  box-shadow: 0 0 16px rgba(220, 20, 60, 0.55), 0 0 40px rgba(220, 20, 60, 0.20);
+}
+.hero-divider::after {
+  content:    '';
+  position:   absolute;
+  inset:      0;
+  background: linear-gradient(
+                90deg,
+                transparent 0%,
+                rgba(255, 255, 255, 0.05) 15%,
+                rgba(255, 255, 255, 0.55) 50%,
+                rgba(255, 255, 255, 0.05) 85%,
+                transparent 100%
+              );
+  animation:  divider-sweep 5s ease-in-out infinite;
+}
+@keyframes divider-sweep {
+  0%, 100% { opacity: 0.3; }
+  50%      { opacity: 1; }
 }
 
 /* Ambient glows (sit above video/glass, below content — purely decorative) */
@@ -313,6 +346,12 @@ body::before {
      1  hero-canvas  (particle network)
      2  hero-body    (all readable UI content)
 ============================================================ */
+.hero-video,
+.hero-glass,
+.hero-canvas {
+  border-radius: inherit;
+}
+
 .hero-video {
   position:       absolute;
   inset:          0;
@@ -1187,6 +1226,7 @@ body::before {
 
   /* Hide the moving video entirely; glass + ambient glows remain */
   .hero-video { display: none !important; }
+  .hero-divider::after { animation: none !important; opacity: 0.6; }
 }
 
 @media (prefers-reduced-data: reduce) {
