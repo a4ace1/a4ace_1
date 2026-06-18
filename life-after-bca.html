@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Life After BCA — Career paths, roadmaps, and next steps for BCA graduates." />
+  <title>Life After BCA — ACE.BCA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+/* ── Tokens (matching ACE.BCA) ── */
+:root {
+  --bg:          #06060c;
+  --bg2:         rgba(255,255,255,0.04);
+  --bg3:         rgba(255,255,255,0.07);
+  --border:      rgba(255,255,255,0.08);
+  --border-mid:  rgba(255,255,255,0.15);
+  --border-glow: rgba(220,20,60,0.30);
+  --accent:      #dc143c;
+  --accent-dim:  rgba(220,20,60,0.10);
+  --accent-glow: rgba(220,20,60,0.20);
+  --text:        #ededf5;
+  --muted:       rgba(255,255,255,0.38);
+  --mono:        'JetBrains Mono','Courier New',monospace;
+  --sans:        'Inter',sans-serif;
+  --shadow:      rgba(0,0,0,0.6);
+  --glass-blur:  blur(20px);
+  --glass-heavy: blur(32px);
+  --green:       #22c55e;
+  --yellow:      #eab308;
+  --blue:        #3b82f6;
+  --purple:      #a855f7;
+}
+[data-theme="light"] {
+  --bg: #eef0f6; --bg2: rgba(255,255,255,0.45); --bg3: rgba(255,255,255,0.65);
+  --border: rgba(255,255,255,0.60); --border-mid: rgba(0,0,0,0.10);
+  --accent: #b8000e; --accent-dim: rgba(184,0,14,0.07);
+  --text: #111118; --muted: rgba(0,0,0,0.42); --shadow: rgba(0,0,0,0.12);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.6;min-height:100vh;transition:background .3s,color .3s;}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 80% 50% at 20% 10%,rgba(100,20,180,0.06) 0%,transparent 60%),radial-gradient(ellipse 60% 60% at 80% 80%,rgba(220,20,60,0.05) 0%,transparent 60%);pointer-events:none;z-index:0;}
+
+/* ── NAV ── */
+.nav{display:flex;justify-content:space-between;align-items:center;padding:0 48px;height:56px;border-bottom:.5px solid var(--border);position:sticky;top:0;background:rgba(6,6,12,0.55);backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur);z-index:100;box-shadow:0 1px 0 rgba(255,255,255,0.04),0 4px 24px rgba(0,0,0,0.35);}
+.nav-logo{font-family:var(--mono);font-weight:800;font-size:14px;letter-spacing:3px;color:var(--text);text-decoration:none;}
+.nav-logo .acc{color:var(--accent);}
+.nav-right{display:flex;align-items:center;gap:16px;}
+.nav-back{font-family:var(--mono);font-size:11px;color:var(--muted);text-decoration:none;letter-spacing:1.5px;transition:color .2s;}
+.nav-back:hover{color:var(--text);}
+.theme-btn{font-size:14px;background:rgba(255,255,255,0.05);border:.5px solid var(--border-mid);color:var(--text);width:32px;height:32px;border-radius:4px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s;}
+.theme-btn:hover{background:rgba(255,255,255,0.10);}
+
+/* ── SCROLL BAR ── */
+.scroll-bar{position:fixed;top:0;left:0;height:2px;width:0%;background:linear-gradient(90deg,var(--accent),rgba(220,20,60,0.25));z-index:999;transition:width .08s linear;box-shadow:0 0 8px rgba(220,20,60,0.55);}
+
+/* ── LAYOUT ── */
+.page{position:relative;z-index:1;}
+.container{max-width:960px;margin:0 auto;padding:0 48px;}
+.section-label{font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:3px;margin:56px 0 22px;display:flex;align-items:center;gap:14px;}
+.section-label::after{content:'';flex:1;height:.5px;background:linear-gradient(90deg,var(--border-mid),transparent);}
+
+/* ── HERO ── */
+.hero{padding:72px 48px 60px;position:relative;overflow:hidden;isolation:isolate;}
+.hero::before{content:'';position:absolute;top:-140px;right:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(220,20,60,0.09) 0%,transparent 68%);pointer-events:none;z-index:0;}
+.hero::after{content:'';position:absolute;bottom:-80px;left:-60px;width:360px;height:360px;background:radial-gradient(circle,rgba(100,20,200,0.07) 0%,transparent 68%);pointer-events:none;z-index:0;}
+.hero-body{position:relative;z-index:1;}
+.hero-tag{font-family:var(--mono);font-size:10px;color:var(--accent);letter-spacing:3px;margin-bottom:20px;display:flex;align-items:center;gap:10px;}
+.hero-tag::before{content:'';width:24px;height:1px;background:var(--accent);opacity:.55;flex-shrink:0;}
+.hero-title{font-family:var(--mono);font-weight:800;font-size:clamp(40px,6vw,72px);line-height:1.06;letter-spacing:-2px;margin-bottom:20px;}
+.hero-title .line2{-webkit-text-stroke:1.5px rgba(255,255,255,0.20);color:transparent;display:block;}
+.hero-sub{font-size:14px;color:var(--muted);max-width:520px;line-height:1.85;margin-bottom:32px;}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;}
+.btn-primary{font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:1.5px;color:#fff;background:linear-gradient(135deg,rgba(220,20,60,.88),rgba(200,10,40,.75));padding:12px 28px;text-decoration:none;border-radius:6px;border:.5px solid rgba(220,20,60,.55);cursor:pointer;transition:transform .15s,box-shadow .2s;box-shadow:0 4px 20px rgba(220,20,60,.25);}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(220,20,60,.4);}
+.btn-ghost{font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:1.5px;color:var(--text);background:rgba(255,255,255,0.05);padding:12px 28px;border-radius:6px;border:.5px solid var(--border-mid);cursor:pointer;transition:background .2s;}
+.btn-ghost:hover{background:rgba(255,255,255,.09);}
+.hero-stats{display:flex;gap:24px;margin-top:40px;flex-wrap:wrap;}
+.hstat{font-family:var(--mono);}
+.hstat-val{font-size:28px;font-weight:800;color:var(--accent);display:block;line-height:1;}
+.hstat-lbl{font-size:9px;color:var(--muted);letter-spacing:2px;margin-top:4px;}
+.hero-divider{height:2px;background:linear-gradient(90deg,transparent 0%,rgba(220,20,60,0.05) 15%,rgba(220,20,60,0.75) 50%,rgba(220,20,60,0.05) 85%,transparent 100%);box-shadow:0 0 16px rgba(220,20,60,0.55),0 0 40px rgba(220,20,60,0.20);position:relative;z-index:1;}
+
+/* ── VIEWS ── */
+.view{display:none;}
+.view.active{display:block;}
+
+/* ── CAREER GRID ── */
+.careers-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;margin-bottom:60px;}
+.career-card{background:rgba(255,255,255,0.04);border:.5px solid var(--border-mid);border-radius:12px;padding:20px;cursor:pointer;transition:border-color .2s,transform .18s,background .2s,box-shadow .2s;position:relative;overflow:hidden;backdrop-filter:blur(12px);}
+.career-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.12),transparent);}
+.career-card:hover{border-color:var(--accent);background:rgba(220,20,60,0.06);transform:translateY(-4px);box-shadow:0 12px 36px rgba(220,20,60,0.18);}
+.career-card.hot{border-color:rgba(220,20,60,0.28);}
+.cc-top{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
+.cc-icon{font-size:28px;}
+.cc-info{}
+.cc-title{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--text);}
+.cc-demand{font-family:var(--mono);font-size:9px;color:var(--muted);letter-spacing:1px;margin-top:2px;}
+.cc-bars{display:flex;flex-direction:column;gap:6px;margin-bottom:14px;}
+.cc-bar-row{display:flex;align-items:center;gap:8px;}
+.cc-bar-label{font-family:var(--mono);font-size:8px;color:var(--muted);letter-spacing:1px;width:60px;flex-shrink:0;}
+.cc-bar-track{flex:1;height:3px;background:rgba(255,255,255,0.07);border-radius:2px;overflow:hidden;}
+.cc-bar-fill{height:100%;border-radius:2px;transition:width .6s ease;}
+.cc-bar-val{font-family:var(--mono);font-size:8px;color:var(--muted);width:28px;text-align:right;}
+.cc-meta{display:flex;gap:6px;flex-wrap:wrap;}
+.cc-tag{font-family:var(--mono);font-size:8px;color:var(--muted);border:.5px solid var(--border);padding:2px 7px;border-radius:3px;background:rgba(255,255,255,0.03);letter-spacing:.5px;}
+.cc-arrow{position:absolute;bottom:16px;right:16px;font-size:11px;color:var(--accent);opacity:0;transition:opacity .2s;}
+.career-card:hover .cc-arrow{opacity:1;}
+
+/* ── ROADMAP VIEW ── */
+#roadmapView{padding-bottom:60px;}
+.rm-header{display:flex;align-items:center;gap:16px;margin-bottom:32px;flex-wrap:wrap;}
+.rm-back{font-family:var(--mono);font-size:11px;color:var(--muted);background:rgba(255,255,255,0.05);border:.5px solid var(--border-mid);padding:6px 14px;border-radius:4px;cursor:pointer;letter-spacing:1px;transition:color .2s,background .2s;}
+.rm-back:hover{color:var(--text);background:rgba(255,255,255,.09);}
+.rm-title-block{}
+.rm-title{font-family:var(--mono);font-size:24px;font-weight:800;color:var(--text);}
+.rm-sub{font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:2px;margin-top:4px;}
+
+.rm-layout{display:grid;grid-template-columns:1fr 280px;gap:24px;align-items:start;}
+.rm-main{}
+
+/* Roadmap timeline */
+.roadmap-timeline{position:relative;padding-left:40px;}
+.roadmap-timeline::before{content:'';position:absolute;left:12px;top:8px;bottom:8px;width:1px;background:linear-gradient(180deg,var(--accent) 0%,rgba(220,20,60,0.15) 100%);}
+.rm-step{position:relative;margin-bottom:16px;}
+.rm-step::before{content:'';position:absolute;left:-34px;top:18px;width:12px;height:12px;border-radius:50%;background:var(--bg);border:1.5px solid var(--accent);box-shadow:0 0 10px rgba(220,20,60,0.35);transition:background .2s,box-shadow .2s;}
+.rm-step.done::before{background:var(--green);border-color:var(--green);box-shadow:0 0 10px rgba(34,197,94,0.45);}
+.rm-step.current::before{background:var(--accent);box-shadow:0 0 16px rgba(220,20,60,0.7),0 0 30px rgba(220,20,60,0.3);}
+.rm-step-card{background:rgba(255,255,255,0.03);border:.5px solid var(--border-mid);border-radius:10px;padding:16px 20px;cursor:pointer;transition:border-color .2s,background .2s;}
+.rm-step-card:hover{border-color:rgba(220,20,60,0.35);background:rgba(220,20,60,0.04);}
+.rm-step.done .rm-step-card{border-color:rgba(34,197,94,0.25);}
+.rm-step.current .rm-step-card{border-color:rgba(220,20,60,0.45);background:rgba(220,20,60,0.05);}
+.rm-step-top{display:flex;align-items:center;justify-content:space-between;gap:12px;}
+.rm-step-left{display:flex;align-items:center;gap:12px;}
+.rm-step-num{font-family:var(--mono);font-size:9px;color:var(--muted);letter-spacing:2px;width:20px;}
+.rm-step-name{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--text);}
+.rm-step-time{font-family:var(--mono);font-size:9px;color:var(--muted);letter-spacing:1px;white-space:nowrap;}
+.rm-step-badge{font-family:var(--mono);font-size:8px;padding:2px 8px;border-radius:3px;letter-spacing:1px;}
+.badge-done{background:rgba(34,197,94,0.10);color:var(--green);border:.5px solid rgba(34,197,94,0.30);}
+.badge-current{background:var(--accent-dim);color:var(--accent);border:.5px solid rgba(220,20,60,0.35);}
+.badge-locked{background:rgba(255,255,255,0.04);color:var(--muted);border:.5px solid var(--border);}
+.rm-step-body{max-height:0;overflow:hidden;transition:max-height .35s ease;}
+.rm-step-body.open{max-height:600px;}
+.rm-step-content{padding-top:14px;border-top:.5px solid var(--border);margin-top:14px;}
+.rm-step-desc{font-size:12px;color:var(--muted);line-height:1.8;margin-bottom:12px;}
+.rm-skills-list{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px;}
+.skill-pill{font-family:var(--mono);font-size:9px;color:var(--text);border:.5px solid var(--border-mid);padding:3px 9px;border-radius:4px;background:rgba(255,255,255,0.05);letter-spacing:.5px;}
+.rm-resources{font-family:var(--mono);font-size:9px;color:var(--muted);letter-spacing:1px;margin-bottom:8px;}
+.rm-res-links{display:flex;flex-direction:column;gap:4px;}
+.rm-res-link{font-family:var(--mono);font-size:10px;color:var(--accent);text-decoration:none;display:flex;align-items:center;gap:6px;}
+.rm-res-link:hover{text-decoration:underline;}
+.rm-mark-btn{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:1px;border:none;padding:8px 16px;border-radius:5px;cursor:pointer;margin-top:10px;transition:transform .15s,box-shadow .2s;}
+.rm-mark-done{background:linear-gradient(135deg,rgba(34,197,94,.85),rgba(20,160,70,.80));color:#fff;box-shadow:0 2px 10px rgba(34,197,94,.25);}
+.rm-mark-done:hover{transform:translateY(-1px);box-shadow:0 4px 18px rgba(34,197,94,.4);}
+.rm-mark-undone{background:rgba(255,255,255,0.06);color:var(--muted);border:.5px solid var(--border-mid);}
+
+/* Sidebar */
+.rm-sidebar{}
+.rm-insights{background:rgba(255,255,255,0.03);border:.5px solid var(--border-mid);border-radius:12px;padding:22px;margin-bottom:16px;backdrop-filter:blur(12px);}
+.rm-insights-title{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:2px;color:var(--muted);margin-bottom:16px;}
+.insight-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
+.insight-label{font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:.5px;}
+.insight-val{font-family:var(--mono);font-size:10px;font-weight:700;color:var(--text);}
+.insight-bar{width:100%;height:3px;background:rgba(255,255,255,0.07);border-radius:2px;margin-top:4px;overflow:hidden;}
+.insight-fill{height:100%;border-radius:2px;transition:width .8s ease;}
+.progress-block{background:rgba(255,255,255,0.03);border:.5px solid var(--border-mid);border-radius:12px;padding:22px;backdrop-filter:blur(12px);}
+.progress-title{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:2px;color:var(--muted);margin-bottom:14px;}
+.progress-ring-wrap{display:flex;align-items:center;gap:16px;margin-bottom:16px;}
+.progress-ring-svg{flex-shrink:0;}
+.progress-ring-info{}
+.progress-ring-pct{font-family:var(--mono);font-size:28px;font-weight:800;color:var(--accent);line-height:1;}
+.progress-ring-lbl{font-family:var(--mono);font-size:9px;color:var(--muted);letter-spacing:1.5px;margin-top:4px;}
+.xp-bar-wrap{margin-top:8px;}
+.xp-label{font-family:var(--mono);font-size:9px;color:var(--muted);letter-spacing:1px;margin-bottom:6px;display:flex;justify-content:space-between;}
+.xp-track{height:4px;background:rgba(255,255,255,0.07);border-radius:2px;overflow:hidden;}
+.xp-fill{height:100%;background:linear-gradient(90deg,var(--purple),var(--accent));border-radius:2px;transition:width .6s ease;}
+.badges-grid{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px;}
+.badge-item{font-family:var(--mono);font-size:8px;padding:3px 8px;border-radius:3px;background:rgba(168,85,247,0.10);color:var(--purple);border:.5px solid rgba(168,85,247,0.30);letter-spacing:.5px;}
+.badge-item.earned{background:rgba(34,197,94,0.10);color:var(--green);border-color:rgba(34,197,94,0.30);}
+
+/* ── QUIZ VIEW ── */
+#quizView{padding-bottom:80px;}
+.quiz-wrap{max-width:640px;margin:0 auto;}
+.quiz-card{background:rgba(255,255,255,0.03);border:.5px solid var(--border-mid);border-radius:14px;padding:36px;backdrop-filter:var(--glass-blur);box-shadow:0 4px 40px rgba(0,0,0,0.25);}
+.quiz-phase{font-family:var(--mono);font-size:9px;color:var(--accent);letter-spacing:3px;margin-bottom:20px;}
+.quiz-q{font-size:16px;font-weight:600;color:var(--text);line-height:1.7;margin-bottom:24px;}
+.quiz-opts{display:flex;flex-direction:column;gap:8px;margin-bottom:24px;}
+.quiz-opt-btn{font-family:var(--mono);font-size:11px;background:rgba(255,255,255,0.04);border:.5px solid var(--border-mid);border-radius:8px;padding:14px 18px;color:var(--text);cursor:pointer;text-align:left;transition:border-color .15s,background .15s;letter-spacing:.5px;}
+.quiz-opt-btn:hover{border-color:var(--accent);background:rgba(220,20,60,0.07);}
+.quiz-opt-btn.selected{border-color:var(--accent);background:rgba(220,20,60,0.12);color:var(--accent);}
+.quiz-nav{display:flex;align-items:center;justify-content:space-between;gap:12px;}
+.quiz-prog{font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:1px;}
+.quiz-result{text-align:center;padding:20px 0;}
+.quiz-result-title{font-family:var(--mono);font-size:24px;font-weight:800;color:var(--text);margin-bottom:8px;}
+.quiz-result-sub{font-size:13px;color:var(--muted);margin-bottom:32px;}
+.rec-cards{display:flex;flex-direction:column;gap:10px;margin-bottom:28px;}
+.rec-card{display:flex;align-items:center;gap:14px;background:rgba(255,255,255,0.04);border:.5px solid var(--border-mid);border-radius:10px;padding:14px 18px;cursor:pointer;transition:border-color .2s,background .2s;}
+.rec-card:hover{border-color:var(--accent);background:rgba(220,20,60,0.06);}
+.rec-rank{font-family:var(--mono);font-size:20px;font-weight:800;color:var(--accent);width:28px;}
+.rec-info{}
+.rec-title{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--text);}
+.rec-reason{font-family:var(--mono);font-size:9px;color:var(--muted);letter-spacing:.5px;margin-top:2px;}
+
+/* ── READINESS CALCULATOR ── */
+#readinessView{padding-bottom:80px;}
+.readiness-wrap{max-width:760px;margin:0 auto;}
+.skills-selector-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px;margin-bottom:28px;}
+.skill-toggle{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,0.04);border:.5px solid var(--border);border-radius:8px;padding:11px 14px;cursor:pointer;transition:border-color .2s,background .2s;}
+.skill-toggle.checked{border-color:var(--green);background:rgba(34,197,94,0.08);}
+.skill-toggle input{display:none;}
+.skill-toggle-icon{width:14px;height:14px;border-radius:3px;border:1.5px solid var(--border-mid);background:rgba(255,255,255,0.04);transition:background .15s,border-color .15s;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:10px;}
+.skill-toggle.checked .skill-toggle-icon{background:var(--green);border-color:var(--green);color:#fff;}
+.skill-toggle-label{font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:.5px;transition:color .15s;}
+.skill-toggle.checked .skill-toggle-label{color:var(--green);}
+.readiness-result{background:rgba(255,255,255,0.03);border:.5px solid var(--border-mid);border-radius:14px;padding:28px;backdrop-filter:blur(12px);}
+.readiness-score-row{display:flex;align-items:center;gap:24px;margin-bottom:24px;flex-wrap:wrap;}
+.readiness-pct{font-family:var(--mono);font-size:52px;font-weight:800;color:var(--accent);line-height:1;}
+.readiness-label{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:1.5px;margin-top:6px;}
+.readiness-verdict{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--text);}
+.readiness-next{font-size:12px;color:var(--muted);margin-top:4px;line-height:1.7;}
+.missing-skills-wrap{}
+.missing-title{font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:2px;margin-bottom:10px;}
+.missing-list{display:flex;flex-wrap:wrap;gap:7px;}
+.missing-pill{font-family:var(--mono);font-size:9px;color:var(--accent);border:.5px solid rgba(220,20,60,0.35);padding:3px 9px;border-radius:4px;background:var(--accent-dim);letter-spacing:.5px;}
+.readiness-track{height:6px;background:rgba(255,255,255,0.07);border-radius:3px;overflow:hidden;margin:16px 0;}
+.readiness-fill{height:100%;border-radius:3px;transition:width .8s ease;}
+
+/* ── BACK TO TOP ── */
+.back-top{position:fixed;bottom:24px;right:24px;z-index:200;}
+.back-top-btn{width:40px;height:40px;border-radius:50%;background:rgba(220,20,60,.85);border:none;color:#fff;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(220,20,60,.35);transition:transform .15s,box-shadow .2s;backdrop-filter:blur(8px);}
+.back-top-btn:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(220,20,60,.5);}
+
+/* ── MOBILE ── */
+@media(max-width:760px){
+  .nav{padding:0 20px;}
+  .hero{padding:48px 20px 48px;}
+  .container{padding:0 20px;}
+  .rm-layout{grid-template-columns:1fr;}
+  .rm-sidebar{display:none;}
+  .careers-grid{grid-template-columns:1fr;}
+}
+@media(max-width:640px){
+  .hero-title{font-size:clamp(32px,10vw,48px);}
+  .skills-selector-grid{grid-template-columns:1fr 1fr;}
+}
+@media(prefers-reduced-motion:reduce){
+  .rm-step::before,.cc-bar-fill,.insight-fill,.xp-fill,.readiness-fill{transition:none!important;}
+}
+  </style>
+</head>
+<body>
+
+<div class="scroll-bar" id="scrollBar"></div>
+
+<nav class="nav">
+  <a href="index.html" class="nav-logo">ACE<span class="acc">.</span>BCA</a>
+  <div class="nav-right">
+    <a href="index.html" class="nav-back">← Back to Portal</a>
+    <button class="theme-btn" id="themeToggle" aria-label="Toggle theme">☀</button>
+  </div>
+</nav>
+
+<div class="page">
+
+  <!-- HERO -->
+  <section class="hero" id="top">
+    <div class="hero-body">
+      <div class="hero-tag">// CAREER EXPLORER · LIFE AFTER BCA</div>
+      <h1 class="hero-title">
+        Where do you go<br>
+        <span class="line2">after BCA?</span>
+      </h1>
+      <p class="hero-sub">
+        Explore 15 career paths. Get a personalized roadmap, skill checklist, salary benchmarks, and honest next steps — built for BCA students, by a BCA student.
+      </p>
+      <div class="hero-actions">
+        <button class="btn-primary" onclick="showView('careersView')">Explore Careers ↓</button>
+        <button class="btn-ghost" onclick="showView('quizView')">Take the Career Quiz →</button>
+        <button class="btn-ghost" onclick="showView('readinessView')">Check Job Readiness</button>
+      </div>
+      <div class="hero-stats">
+        <div class="hstat"><span class="hstat-val">15</span><span class="hstat-lbl">CAREER PATHS</span></div>
+        <div class="hstat"><span class="hstat-val">60+</span><span class="hstat-lbl">ROADMAP STEPS</span></div>
+        <div class="hstat"><span class="hstat-val">₹4L–30L</span><span class="hstat-lbl">SALARY RANGE</span></div>
+        <div class="hstat"><span class="hstat-val">Free</span><span class="hstat-lbl">NO SIGNUP</span></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="hero-divider"></div>
+
+  <!-- CAREERS VIEW -->
+  <div class="view active" id="careersView">
+    <div class="container">
+      <div class="section-label">// CAREER PATHS</div>
+      <div class="careers-grid" id="careersGrid"></div>
+    </div>
+  </div>
+
+  <!-- ROADMAP VIEW -->
+  <div class="view" id="roadmapView">
+    <div class="container">
+      <div class="section-label">// ROADMAP</div>
+      <div class="rm-header">
+        <button class="rm-back" onclick="showView('careersView')">← All Careers</button>
+        <div class="rm-title-block">
+          <div class="rm-title" id="rmTitle">—</div>
+          <div class="rm-sub" id="rmSub">INTERACTIVE ROADMAP</div>
+        </div>
+      </div>
+      <div class="rm-layout">
+        <div class="rm-main">
+          <div class="roadmap-timeline" id="roadmapTimeline"></div>
+        </div>
+        <div class="rm-sidebar">
+          <div class="rm-insights" id="rmInsights"></div>
+          <div class="progress-block" id="rmProgress"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUIZ VIEW -->
+  <div class="view" id="quizView">
+    <div class="container">
+      <div class="section-label">// CAREER QUIZ</div>
+      <button class="rm-back" onclick="showView('careersView')" style="margin-bottom:24px;">← All Careers</button>
+      <div class="quiz-wrap">
+        <div class="quiz-card" id="quizCard"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- READINESS VIEW -->
+  <div class="view" id="readinessView">
+    <div class="container">
+      <div class="section-label">// JOB READINESS CALCULATOR</div>
+      <button class="rm-back" onclick="showView('careersView')" style="margin-bottom:24px;">← All Careers</button>
+      <div class="readiness-wrap" id="readinessWrap"></div>
+    </div>
+  </div>
+
+</div><!-- /page -->
+
+<div class="back-top">
+  <button class="back-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
+</div>
+
+<script>
+"use strict";
+
+/* ══ THEME ══ */
+var html = document.documentElement;
+var themeBtn = document.getElementById("themeToggle");
+var saved = localStorage.getItem("bca-theme") || "dark";
+function applyTheme(t){ html.setAttribute("data-theme",t); themeBtn.textContent = t==="dark"?"☀":"🌙"; localStorage.setItem("bca-theme",t); }
+applyTheme(saved);
+themeBtn.addEventListener("click",function(){ applyTheme(html.getAttribute("data-theme")==="dark"?"light":"dark"); });
+
+/* ══ SCROLL BAR ══ */
+var scrollBar = document.getElementById("scrollBar");
+window.addEventListener("scroll",function(){ var t=document.documentElement.scrollTop||document.body.scrollTop; var h=document.documentElement.scrollHeight-document.documentElement.clientHeight; scrollBar.style.width=(h>0?(t/h)*100:0)+"%"; },{passive:true});
+
+/* ══ VIEWS ══ */
+function showView(id){
+  document.querySelectorAll(".view").forEach(function(v){ v.classList.remove("active"); });
+  document.getElementById(id).classList.add("active");
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+/* ══════════════════════════════════════
+   DATA
+══════════════════════════════════════ */
+var CAREERS = [
+  {
+    id:"webdev", icon:"🌐", title:"Web Developer", demand:8, difficulty:5, time:"3–6 Months", salary:"₹3L–10L",
+    hot:true, tags:["Frontend","HTML/CSS","JavaScript"],
+    desc:"Build websites and web apps. One of the most in-demand roles — huge freelance + job market.",
+    insights:{salary:"₹3L–10L",remote:"Very High",growth:"High",competition:"High",difficulty:5,demand:8},
+    roadmap:[
+      {name:"HTML & CSS",time:"3 Weeks",desc:"The skeleton and skin of the web. Learn semantic HTML5, CSS Grid, Flexbox, and responsive design.", skills:["HTML5","CSS3","Flexbox","Grid","Media Queries"],resources:[{name:"MDN Web Docs",url:"https://developer.mozilla.org"},{name:"The Odin Project",url:"https://www.theodinproject.com"}]},
+      {name:"JavaScript",time:"4–6 Weeks",desc:"Add interactivity. Learn ES6+, DOM manipulation, fetch API, async/await.", skills:["ES6+","DOM","Fetch API","Async/Await","Events"],resources:[{name:"javascript.info",url:"https://javascript.info"},{name:"freeCodeCamp JS",url:"https://www.freecodecamp.org"}]},
+      {name:"Git & GitHub",time:"1 Week",desc:"Version control is non-negotiable. Every employer checks your GitHub.", skills:["Git","GitHub","Branching","Pull Requests"],resources:[{name:"GitHub Docs",url:"https://docs.github.com"},{name:"Learn Git Branching",url:"https://learngitbranching.js.org"}]},
+      {name:"React.js",time:"4–6 Weeks",desc:"The most popular frontend library. Components, state, props, hooks.", skills:["React","JSX","Hooks","State","Props","Routing"],resources:[{name:"React Docs",url:"https://react.dev"},{name:"Scrimba React Course",url:"https://scrimba.com"}]},
+      {name:"Build 3 Projects",time:"4 Weeks",desc:"Portfolio > certificates. Build a portfolio site, a todo app, and one real project.", skills:["Project Design","Deployment","Netlify","Vercel"],resources:[{name:"Frontend Mentor",url:"https://www.frontendmentor.io"}]},
+      {name:"Apply & Iterate",time:"Ongoing",desc:"Apply to junior dev roles, internships, and freelance gigs. Your first project pays more than another course.", skills:["Resume","LinkedIn","Freelance","Cold Outreach"],resources:[{name:"LinkedIn Jobs",url:"https://linkedin.com/jobs"},{name:"Internshala",url:"https://internshala.com"}]},
+    ]
+  },
+  {
+    id:"fullstack", icon:"⚡", title:"Full Stack Developer", demand:9, difficulty:7, time:"8–12 Months", salary:"₹6L–18L",
+    hot:true, tags:["Frontend","Backend","Databases"],
+    desc:"Build complete products — frontend to backend. Highest demand in startups and product companies.",
+    insights:{salary:"₹6L–18L",remote:"Very High",growth:"Very High",competition:"High",difficulty:7,demand:9},
+    roadmap:[
+      {name:"HTML, CSS & JS",time:"5 Weeks",desc:"Master the frontend fundamentals before anything else.", skills:["HTML5","CSS3","JavaScript","DOM","Git"],resources:[{name:"The Odin Project",url:"https://www.theodinproject.com"}]},
+      {name:"React.js",time:"5 Weeks",desc:"The standard frontend framework. Components, hooks, state management.", skills:["React","Redux","React Router","Axios"],resources:[{name:"React Docs",url:"https://react.dev"}]},
+      {name:"Node.js & Express",time:"4 Weeks",desc:"Backend with JavaScript. REST APIs, middleware, routing.", skills:["Node.js","Express","REST API","NPM","Middleware"],resources:[{name:"Node.js Docs",url:"https://nodejs.org/docs"},{name:"Express Docs",url:"https://expressjs.com"}]},
+      {name:"Databases",time:"3 Weeks",desc:"SQL (PostgreSQL/MySQL) and NoSQL (MongoDB). Every backend needs one.", skills:["SQL","MongoDB","PostgreSQL","Mongoose","Queries"],resources:[{name:"SQL Zoo",url:"https://sqlzoo.net"},{name:"MongoDB University",url:"https://university.mongodb.com"}]},
+      {name:"Auth & Security",time:"2 Weeks",desc:"JWT, sessions, bcrypt, CORS. Don't skip this.", skills:["JWT","bcrypt","Sessions","CORS","HTTPS"],resources:[{name:"OWASP Top 10",url:"https://owasp.org/www-project-top-ten/"}]},
+      {name:"Deployment",time:"1 Week",desc:"Ship your app. Railway, Vercel, Render, or a VPS.", skills:["Docker basics","Vercel","Railway","CI/CD","Env vars"],resources:[{name:"Railway.app",url:"https://railway.app"},{name:"Vercel",url:"https://vercel.com"}]},
+      {name:"2 Full Projects",time:"6 Weeks",desc:"Build a real full-stack app: e-commerce, SaaS clone, or a tool you'd actually use.", skills:["Project architecture","README","API docs"],resources:[{name:"GitHub",url:"https://github.com"}]},
+    ]
+  },
+  {
+    id:"android", icon:"📱", title:"Android Developer", demand:7, difficulty:6, time:"6–9 Months", salary:"₹4L–14L",
+    hot:false, tags:["Kotlin","Android","Mobile"],
+    desc:"Build Android apps — one of the most downloaded platforms on the planet.",
+    insights:{salary:"₹4L–14L",remote:"High",growth:"Moderate",competition:"Moderate",difficulty:6,demand:7},
+    roadmap:[
+      {name:"Kotlin Basics",time:"3 Weeks",desc:"Kotlin is the official Android language. Learn syntax, OOP, null safety, coroutines.", skills:["Kotlin","OOP","Coroutines","Null Safety"],resources:[{name:"Kotlin Docs",url:"https://kotlinlang.org/docs"},{name:"Kotlin Koans",url:"https://play.kotlinlang.org/koans"}]},
+      {name:"Android Studio",time:"1 Week",desc:"Set up your dev environment. Understand project structure, Gradle, emulators.", skills:["Android Studio","Gradle","AVD","Logcat"],resources:[{name:"Android Developers",url:"https://developer.android.com"}]},
+      {name:"UI — Jetpack Compose",time:"4 Weeks",desc:"Modern declarative UI for Android. Layouts, navigation, theming.", skills:["Compose","Layouts","Navigation","Material3"],resources:[{name:"Compose Docs",url:"https://developer.android.com/jetpack/compose"}]},
+      {name:"Architecture (MVVM)",time:"2 Weeks",desc:"Clean code architecture. ViewModel, LiveData, Room.", skills:["MVVM","ViewModel","Room","LiveData","Flow"],resources:[{name:"Android Architecture Guide",url:"https://developer.android.com/topic/architecture"}]},
+      {name:"Networking & APIs",time:"2 Weeks",desc:"Retrofit + OkHttp for REST APIs. Parse JSON with Gson or Moshi.", skills:["Retrofit","OkHttp","JSON","REST","Coroutines"],resources:[{name:"Retrofit Docs",url:"https://square.github.io/retrofit/"}]},
+      {name:"Publish on Play Store",time:"1 Week",desc:"Ship a real app. Pay ₹1,750 one-time fee, meet Google policies, and get your first app live.", skills:["Signing APK","Play Console","ASO"],resources:[{name:"Google Play Console",url:"https://play.google.com/console"}]},
+    ]
+  },
+  {
+    id:"cybersec", icon:"🔐", title:"Cybersecurity Analyst", demand:9, difficulty:8, time:"8–12 Months", salary:"₹5L–18L",
+    hot:true, tags:["Security","Networking","Linux"],
+    desc:"Defend systems and find vulnerabilities. One of the highest-demand skills globally — perpetual shortage of talent.",
+    insights:{salary:"₹5L–18L",remote:"High",growth:"Very High",competition:"Low",difficulty:8,demand:9},
+    roadmap:[
+      {name:"Linux Fundamentals",time:"2 Weeks",desc:"Cybersecurity runs on Linux. File system, permissions, bash scripting, process management.", skills:["Linux","Bash","File Permissions","Processes","SSH"],resources:[{name:"OverTheWire Bandit",url:"https://overthewire.org/wargames/bandit/"},{name:"Linux Journey",url:"https://linuxjourney.com"}]},
+      {name:"Networking",time:"3 Weeks",desc:"TCP/IP, DNS, HTTP, OSI model, Wireshark. You can't hack what you don't understand.", skills:["TCP/IP","DNS","HTTP","Wireshark","OSI Model"],resources:[{name:"Professor Messer Network+",url:"https://www.professormesser.com"},{name:"TryHackMe Pre-Security",url:"https://tryhackme.com"}]},
+      {name:"Web Security Basics",time:"3 Weeks",desc:"OWASP Top 10: SQLi, XSS, CSRF, SSRF, broken auth. Understand attacks before learning defence.", skills:["OWASP","SQLi","XSS","CSRF","Burp Suite basics"],resources:[{name:"OWASP Top 10",url:"https://owasp.org/www-project-top-ten/"},{name:"PortSwigger Web Academy",url:"https://portswigger.net/web-security"}]},
+      {name:"TryHackMe / HackTheBox",time:"8 Weeks",desc:"Hands-on hacking rooms. Solve CTF challenges. This is where most self-taught analysts learn.", skills:["CTF","Privilege Escalation","Recon","Exploitation"],resources:[{name:"TryHackMe",url:"https://tryhackme.com"},{name:"HackTheBox",url:"https://hackthebox.com"}]},
+      {name:"Scripting (Python)",time:"3 Weeks",desc:"Automate scans, write exploits, parse logs. Python is the language of security.", skills:["Python","Socket programming","Scripting","Automation"],resources:[{name:"Automate Boring Stuff",url:"https://automatetheboringstuff.com"}]},
+      {name:"Certification",time:"4 Weeks",desc:"CompTIA Security+, eJPT, or CEH — pick one. Gets you past HR filters.", skills:["Security+","eJPT","CEH","Exam prep"],resources:[{name:"CompTIA Security+",url:"https://www.comptia.org/certifications/security"},{name:"eLearnSecurity eJPT",url:"https://elearnsecurity.com"}]},
+      {name:"Internship / Bug Bounty",time:"Ongoing",desc:"Apply to SOC analyst internships or hunt bugs on HackerOne/Bugcrowd. First real paycheck.", skills:["SOC","Bug Bounty","Report Writing","HackerOne"],resources:[{name:"HackerOne",url:"https://hackerone.com"},{name:"Bugcrowd",url:"https://bugcrowd.com"}]},
+    ]
+  },
+  {
+    id:"cloud", icon:"☁️", title:"Cloud Engineer", demand:9, difficulty:7, time:"6–10 Months", salary:"₹6L–22L",
+    hot:true, tags:["AWS","Azure","DevOps"],
+    desc:"Design, deploy, and manage cloud infrastructure. AWS alone has a perpetual talent shortage.",
+    insights:{salary:"₹6L–22L",remote:"Very High",growth:"Very High",competition:"Low",difficulty:7,demand:9},
+    roadmap:[
+      {name:"Linux & Networking",time:"2 Weeks",desc:"Core prerequisite. Bash, networking, SSH, firewalls.", skills:["Linux","Bash","SSH","Firewalls","Subnets"],resources:[{name:"Linux Journey",url:"https://linuxjourney.com"}]},
+      {name:"AWS / Azure Fundamentals",time:"4 Weeks",desc:"Start with AWS. EC2, S3, VPC, IAM, RDS, Lambda — the foundational services.", skills:["EC2","S3","IAM","VPC","RDS","Lambda"],resources:[{name:"AWS Free Tier",url:"https://aws.amazon.com/free"},{name:"AWS Skill Builder",url:"https://skillbuilder.aws"}]},
+      {name:"Infrastructure as Code",time:"3 Weeks",desc:"Terraform or AWS CloudFormation. Automate your infrastructure, don't click around consoles.", skills:["Terraform","CloudFormation","HCL","Modules"],resources:[{name:"Terraform Docs",url:"https://developer.hashicorp.com/terraform"},{name:"freeCodeCamp Terraform",url:"https://www.freecodecamp.org"}]},
+      {name:"Docker & Kubernetes",time:"4 Weeks",desc:"Containerization is mandatory. Package and orchestrate apps at scale.", skills:["Docker","Kubernetes","kubectl","Helm","ECR"],resources:[{name:"Play with Docker",url:"https://labs.play-with-docker.com"},{name:"Kubernetes Docs",url:"https://kubernetes.io/docs"}]},
+      {name:"CI/CD Pipelines",time:"2 Weeks",desc:"GitHub Actions, AWS CodePipeline. Automate testing and deployments.", skills:["GitHub Actions","CodePipeline","Jenkins","ArgoCD"],resources:[{name:"GitHub Actions Docs",url:"https://docs.github.com/en/actions"}]},
+      {name:"Cloud Certification",time:"4 Weeks",desc:"AWS Cloud Practitioner → Solutions Architect Associate. Pay bump at each level.", skills:["AWS CCP","SAA","Exam prep","Cloud concepts"],resources:[{name:"AWS Certified SAA",url:"https://aws.amazon.com/certification"},{name:"A Cloud Guru",url:"https://acloudguru.com"}]},
+    ]
+  },
+  {
+    id:"devops", icon:"⚙️", title:"DevOps Engineer", demand:9, difficulty:8, time:"9–14 Months", salary:"₹7L–24L",
+    hot:true, tags:["CI/CD","Docker","Kubernetes"],
+    desc:"Bridge development and operations. Automate everything. DevOps engineers are extremely well-paid.",
+    insights:{salary:"₹7L–24L",remote:"Very High",growth:"Very High",competition:"Low",difficulty:8,demand:9},
+    roadmap:[
+      {name:"Linux & Shell",time:"3 Weeks",desc:"Everything runs on Linux. Master bash scripting, system administration, and process management.", skills:["Linux","Bash","Cron","Systemd","SSH"],resources:[{name:"Linux Command Line",url:"https://linuxcommand.org"}]},
+      {name:"Git & Version Control",time:"1 Week",desc:"Branching strategies, PR workflows, Git hooks.", skills:["Git","GitFlow","Hooks","Rebase"],resources:[{name:"Atlassian Git",url:"https://www.atlassian.com/git"}]},
+      {name:"Programming (Python/Go)",time:"4 Weeks",desc:"Script your way out of manual work. Python for glue, Go for performance.", skills:["Python","Go","Scripting","APIs","Automation"],resources:[{name:"Automate Boring Stuff",url:"https://automatetheboringstuff.com"}]},
+      {name:"Docker",time:"3 Weeks",desc:"Containerize everything. Dockerfiles, images, volumes, networks, Compose.", skills:["Docker","Dockerfile","Docker Compose","Registries"],resources:[{name:"Docker Docs",url:"https://docs.docker.com"}]},
+      {name:"Kubernetes",time:"5 Weeks",desc:"The container orchestrator. Pods, deployments, services, ingress, Helm.", skills:["Kubernetes","kubectl","Helm","Ingress","Namespaces"],resources:[{name:"Kubernetes Docs",url:"https://kubernetes.io/docs"},{name:"Kelsey Hightower k8s the hard way",url:"https://github.com/kelseyhightower/kubernetes-the-hard-way"}]},
+      {name:"CI/CD & Cloud",time:"4 Weeks",desc:"GitHub Actions, Jenkins, ArgoCD. Pair with AWS/GCP.", skills:["GitHub Actions","Jenkins","ArgoCD","AWS","Terraform"],resources:[{name:"GitHub Actions",url:"https://docs.github.com/en/actions"}]},
+      {name:"Monitoring & Alerting",time:"2 Weeks",desc:"Prometheus, Grafana, ELK stack. You can't fix what you can't see.", skills:["Prometheus","Grafana","ELK","Alerting","SLOs"],resources:[{name:"Grafana Docs",url:"https://grafana.com/docs"}]},
+    ]
+  },
+  {
+    id:"ml", icon:"🤖", title:"AI / ML Engineer", demand:10, difficulty:9, time:"12–18 Months", salary:"₹8L–30L+",
+    hot:true, tags:["Python","TensorFlow","Data"],
+    desc:"The hottest field in tech. Build models that see, read, and predict. Requires strong math.",
+    insights:{salary:"₹8L–30L+",remote:"Very High",growth:"Explosive",competition:"Moderate",difficulty:9,demand:10},
+    roadmap:[
+      {name:"Python & Math",time:"4 Weeks",desc:"Python fluency + linear algebra, calculus, probability. No shortcuts here.", skills:["Python","NumPy","Linear Algebra","Calculus","Probability"],resources:[{name:"3Blue1Brown",url:"https://www.3blue1brown.com"},{name:"fast.ai",url:"https://www.fast.ai"}]},
+      {name:"Data Handling",time:"3 Weeks",desc:"Pandas, Matplotlib, Seaborn. Cleaning and visualizing messy data.", skills:["Pandas","NumPy","Matplotlib","Seaborn","EDA"],resources:[{name:"Kaggle Courses",url:"https://www.kaggle.com/learn"}]},
+      {name:"Classical ML",time:"4 Weeks",desc:"Linear/logistic regression, decision trees, SVM, K-means — scikit-learn.", skills:["scikit-learn","Regression","Classification","Clustering","Cross-validation"],resources:[{name:"Scikit-learn Docs",url:"https://scikit-learn.org"},{name:"Kaggle Competitions",url:"https://www.kaggle.com"}]},
+      {name:"Deep Learning",time:"6 Weeks",desc:"Neural networks, CNNs, RNNs, transformers with PyTorch or TensorFlow.", skills:["PyTorch","TensorFlow","CNNs","RNNs","Transformers"],resources:[{name:"fast.ai Practical DL",url:"https://course.fast.ai"},{name:"Deep Learning Specialization",url:"https://www.coursera.org/specializations/deep-learning"}]},
+      {name:"NLP / Computer Vision",time:"4 Weeks",desc:"Pick a specialization. Fine-tune LLMs with HuggingFace or build CV pipelines.", skills:["HuggingFace","OpenCV","BERT","Fine-tuning","YOLO"],resources:[{name:"HuggingFace",url:"https://huggingface.co"},{name:"OpenCV Docs",url:"https://docs.opencv.org"}]},
+      {name:"MLOps & Deployment",time:"3 Weeks",desc:"Productionize models. FastAPI, Docker, MLflow, model monitoring.", skills:["FastAPI","MLflow","Docker","Model serving","Monitoring"],resources:[{name:"MLflow Docs",url:"https://mlflow.org"},{name:"FastAPI Docs",url:"https://fastapi.tiangolo.com"}]},
+      {name:"Portfolio & Kaggle",time:"Ongoing",desc:"Top 10% on Kaggle + 3 deployed projects = interview calls.", skills:["Kaggle","Project docs","GitHub","Research papers"],resources:[{name:"Kaggle",url:"https://kaggle.com"},{name:"Papers with Code",url:"https://paperswithcode.com"}]},
+    ]
+  },
+  {
+    id:"data", icon:"📊", title:"Data Analyst", demand:8, difficulty:5, time:"3–5 Months", salary:"₹4L–12L",
+    hot:false, tags:["SQL","Excel","Python"],
+    desc:"Turn raw data into decisions. Lower barrier to entry than ML — still highly valued in every company.",
+    insights:{salary:"₹4L–12L",remote:"High",growth:"High",competition:"Moderate",difficulty:5,demand:8},
+    roadmap:[
+      {name:"Excel / Google Sheets",time:"1 Week",desc:"VLOOKUP, pivot tables, charts. Still used everywhere — even in 2025.", skills:["VLOOKUP","Pivot Tables","Charts","IF formulas"],resources:[{name:"Excel Jet",url:"https://exceljet.net"}]},
+      {name:"SQL",time:"3 Weeks",desc:"The most important skill for a data analyst. Joins, subqueries, window functions.", skills:["SQL","Joins","Subqueries","Window Functions","CTEs"],resources:[{name:"Mode SQL Tutorial",url:"https://mode.com/sql-tutorial"},{name:"SQL Zoo",url:"https://sqlzoo.net"}]},
+      {name:"Python for Data",time:"4 Weeks",desc:"Pandas, Matplotlib, Seaborn. EDA and visualization.", skills:["Python","Pandas","Matplotlib","Seaborn","EDA"],resources:[{name:"Kaggle Python",url:"https://www.kaggle.com/learn/python"}]},
+      {name:"Tableau / Power BI",time:"2 Weeks",desc:"Build dashboards that non-technical stakeholders actually understand.", skills:["Tableau","Power BI","Dashboards","KPIs","Storytelling"],resources:[{name:"Tableau Public",url:"https://public.tableau.com"},{name:"Power BI Docs",url:"https://docs.microsoft.com/en-us/power-bi/"}]},
+      {name:"Statistics",time:"2 Weeks",desc:"Descriptive stats, distributions, hypothesis testing, A/B testing.", skills:["Statistics","Hypothesis Testing","A/B Testing","Correlation","Regression"],resources:[{name:"StatQuest YouTube",url:"https://www.youtube.com/@StatQuestWithJoshStarmer"}]},
+      {name:"Portfolio Projects",time:"3 Weeks",desc:"Analyze a real dataset: COVID trends, IPL stats, Zomato data. Post on Kaggle and LinkedIn.", skills:["Storytelling","Insight writing","GitHub","LinkedIn"],resources:[{name:"Kaggle Datasets",url:"https://www.kaggle.com/datasets"}]},
+    ]
+  },
+  {
+    id:"uiux", icon:"🎨", title:"UI/UX Designer", demand:7, difficulty:5, time:"3–6 Months", salary:"₹3L–12L",
+    hot:false, tags:["Figma","Design Systems","Research"],
+    desc:"Design beautiful, usable digital products. High creative satisfaction — good bridge role to product management.",
+    insights:{salary:"₹3L–12L",remote:"Very High",growth:"Moderate",competition:"High",difficulty:5,demand:7},
+    roadmap:[
+      {name:"Design Principles",time:"1 Week",desc:"Typography, color theory, spacing, Gestalt principles. The foundation.", skills:["Typography","Color Theory","Spacing","Visual Hierarchy","Gestalt"],resources:[{name:"Refactoring UI",url:"https://www.refactoringui.com"},{name:"Laws of UX",url:"https://lawsofux.com"}]},
+      {name:"Figma",time:"3 Weeks",desc:"The industry standard. Auto-layout, components, variants, prototyping.", skills:["Figma","Auto-layout","Components","Variants","Prototyping"],resources:[{name:"Figma Tutorials",url:"https://help.figma.com/hc/en-us/categories/360002051613"},{name:"Figma Community",url:"https://www.figma.com/community"}]},
+      {name:"UX Research",time:"2 Weeks",desc:"User interviews, surveys, usability testing. Design for real people, not you.", skills:["User Interviews","Usability Testing","Personas","Journey Maps","Affinity Maps"],resources:[{name:"Nielsen Norman Group",url:"https://www.nngroup.com"}]},
+      {name:"Design Systems",time:"2 Weeks",desc:"Build reusable component libraries. Study Material Design, Ant Design, Atlassian.", skills:["Component Libraries","Tokens","Documentation","Handoff"],resources:[{name:"Material Design",url:"https://m3.material.io"},{name:"Carbon Design",url:"https://carbondesignsystem.com"}]},
+      {name:"Case Studies",time:"3 Weeks",desc:"Document 3 projects: problem statement, research, iterations, final design, results.", skills:["Case Study Writing","Behance","Portfolio","Storytelling"],resources:[{name:"Behance",url:"https://www.behance.net"},{name:"Dribbble",url:"https://dribbble.com"}]},
+    ]
+  },
+  {
+    id:"freelance", icon:"💻", title:"Freelancer", demand:7, difficulty:6, time:"3–12 Months", salary:"₹2L–Unlimited",
+    hot:false, tags:["Self-employment","Clients","Remote"],
+    desc:"Be your own boss. Tech freelancing is booming in India — Upwork, Toptal, Contra, LinkedIn.",
+    insights:{salary:"₹2L–Unlimited",remote:"100%",growth:"Self-driven",competition:"High",difficulty:6,demand:7},
+    roadmap:[
+      {name:"Pick a Niche",time:"1 Week",desc:"Web dev, mobile dev, UI design, no-code — pick one. Generalists struggle, specialists thrive.", skills:["Niche selection","Market research","Positioning"],resources:[{name:"Freelance.school",url:"https://freelance.school"}]},
+      {name:"Master One Skill",time:"8 Weeks",desc:"Good enough to solve real problems. Portfolio first, credentials second.", skills:["Core skill","Project execution","Problem solving"],resources:[{name:"The Odin Project",url:"https://www.theodinproject.com"}]},
+      {name:"Build a Portfolio",time:"2 Weeks",desc:"3 projects minimum, even if they're for fictional clients. Looks matter.", skills:["Portfolio site","Case studies","GitHub","Testimonials"],resources:[{name:"Contra",url:"https://contra.com"}]},
+      {name:"First Client",time:"Varies",desc:"Internshala, Upwork, Fiverr, LinkedIn, local businesses — pick one channel and go deep.", skills:["Proposal writing","Pricing","Contracts","Communication"],resources:[{name:"Upwork",url:"https://www.upwork.com"},{name:"Internshala Freelance",url:"https://internshala.com/freelance"}]},
+      {name:"Deliver + Retain",time:"Ongoing",desc:"Deliver on time, communicate clearly, and ask for referrals. 80% of freelance income is repeat business.", skills:["Client management","Invoicing","Scope creep","Referrals"],resources:[{name:"Hello Bonsai",url:"https://www.hellobonsai.com"}]},
+    ]
+  },
+  {
+    id:"entrepreneur", icon:"🚀", title:"Entrepreneur / Startup", demand:6, difficulty:10, time:"12–36 Months", salary:"₹0–Crores",
+    hot:false, tags:["Product","Business","Risk"],
+    desc:"Build something of your own. Highest risk, highest potential reward. Not for everyone — and that's okay.",
+    insights:{salary:"₹0–Crores",remote:"Yes",growth:"You decide",competition:"Market-dependent",difficulty:10,demand:6},
+    roadmap:[
+      {name:"Identify a Real Problem",time:"2–4 Weeks",desc:"Talk to 50 people. Find a problem that makes them reach for their wallet. 90% of failed startups had no real user problem.", skills:["User interviews","Problem validation","Empathy mapping"],resources:[{name:"The Mom Test",url:"https://www.momtestbook.com"}]},
+      {name:"Build an MVP",time:"4–8 Weeks",desc:"The smallest thing that tests your assumption. Could be a Google Form, a WhatsApp bot, or a 5-page web app.", skills:["MVP","No-code tools","Webflow","Notion","Rapid prototyping"],resources:[{name:"Indie Hackers",url:"https://www.indiehackers.com"},{name:"Product Hunt",url:"https://www.producthunt.com"}]},
+      {name:"Get First 10 Users",time:"4–8 Weeks",desc:"Forget virality. Get 10 users manually. Do things that don't scale.", skills:["Distribution","Cold outreach","Communities","Niche marketing"],resources:[{name:"Paul Graham Essays",url:"https://www.paulgraham.com/essays.html"}]},
+      {name:"Revenue or Die",time:"Ongoing",desc:"Charge money. Free users tell you nothing. Paying users tell you the truth.", skills:["Pricing","Payment integration","Razorpay","Subscriptions"],resources:[{name:"Razorpay Docs",url:"https://razorpay.com/docs"}]},
+      {name:"Funding (Optional)",time:"Varies",desc:"Bootstrap as long as possible. If you need scale capital: Y Combinator, Sequoia Surge, 100X.VC for India.", skills:["Pitch deck","Term sheets","Cap table","Investor relations"],resources:[{name:"Y Combinator",url:"https://www.ycombinator.com"},{name:"100X.VC",url:"https://www.100x.vc"}]},
+    ]
+  },
+  {
+    id:"mca", icon:"🎓", title:"MCA / Higher Studies", demand:6, difficulty:5, time:"2 Years", salary:"₹5L–16L after MCA",
+    hot:false, tags:["Postgrad","NIMCET","Specialization"],
+    desc:"Master of Computer Applications opens government job opportunities and higher-paying private roles.",
+    insights:{salary:"₹5L–16L post-MCA",remote:"Moderate",growth:"Moderate",competition:"Moderate",difficulty:5,demand:6},
+    roadmap:[
+      {name:"Decide: MCA vs Direct Job",time:"1 Week",desc:"MCA is worth it if you want government jobs, NIT/IIIT placement, or need to fill CS gaps. Skip if you have strong skills.", skills:["Career planning","ROI analysis"],resources:[{name:"MCA Colleges India",url:"https://www.careers360.com/courses/mca-course"}]},
+      {name:"Prepare for NIMCET / CUET",time:"12 Weeks",desc:"NIMCET for NITs. Covers: Maths, Reasoning, CS fundamentals, English.", skills:["Discrete Math","Reasoning","C++","Data Structures","English"],resources:[{name:"NIMCET Syllabus",url:"https://nimcet.in"},{name:"GeeksforGeeks NIMCET",url:"https://www.geeksforgeeks.org/nimcet/"}]},
+      {name:"State Entrance Exams",time:"8 Weeks",desc:"TANCET (Tamil Nadu), MAH-MCA (Maharashtra), etc. Multiple chances.", skills:["State syllabus","Mock tests","Time management"],resources:[{name:"TANCET Prep",url:"https://www.tnea.ac.in"}]},
+      {name:"MCA Specialization",time:"2 Years",desc:"Choose: AI/ML, Cloud, Cybersecurity, or Data Science specialization. Avoid generic MCA.", skills:["Specialization research","Internships","Projects","Placement prep"],resources:[{name:"NIT Tiruchirappalli MCA",url:"https://www.nitt.edu"},{name:"Manipal MCA",url:"https://manipal.edu"}]},
+    ]
+  },
+  {
+    id:"govtjobs", icon:"🏛️", title:"Government Jobs", demand:7, difficulty:6, time:"1–3 Years prep", salary:"₹4L–10L + benefits",
+    hot:false, tags:["SSC","IBPS","Stability"],
+    desc:"Job security, pension, and respect. IBPS, SSC CGL, DRDO, NIC, Railways — many paths for CS/BCA graduates.",
+    insights:{salary:"₹4L–10L + benefits",remote:"Low",growth:"Stable",competition:"Very High",difficulty:6,demand:7},
+    roadmap:[
+      {name:"Identify Target Exams",time:"1 Week",desc:"SSC CGL, IBPS CWE Clerk/PO, NIC Scientist-B, DRDO, Railways NTPC — pick 2 targets max.", skills:["Exam calendar","Eligibility","Syllabus comparison"],resources:[{name:"Sarkari Result",url:"https://www.sarkariresult.com"},{name:"SSC Official",url:"https://ssc.nic.in"}]},
+      {name:"Quantitative Aptitude",time:"6 Weeks",desc:"Numbers, algebra, percentages, time-speed-distance, DI. Most candidates fail here.", skills:["Arithmetic","Algebra","DI","Time management"],resources:[{name:"R.S. Aggarwal Quantitative Aptitude",url:"https://www.amazon.in"}]},
+      {name:"Reasoning & GK",time:"6 Weeks",desc:"Logical reasoning, series, puzzles. Current affairs + static GK.", skills:["Logical Reasoning","Puzzles","Current Affairs","Static GK"],resources:[{name:"Gradeup",url:"https://gradeup.co"},{name:"Testbook",url:"https://testbook.com"}]},
+      {name:"Technical Section",time:"4 Weeks",desc:"For CS/IT posts: OS, DBMS, Networking, DSA, C/C++/Java basics. NIC Scientist needs strong CS.", skills:["OS","DBMS","Networking","DSA","Programming"],resources:[{name:"GeeksforGeeks GateCS",url:"https://www.geeksforgeeks.org/gate-cs-notes-gq/"},{name:"GATE Overflow",url:"https://gateoverflow.in"}]},
+      {name:"Mock Tests & Strategy",time:"Ongoing",desc:"Attempt mocks under timed conditions. Analyze mistakes. Consistent daily practice > cramming.", skills:["Time management","Accuracy","Negative marking","Review"],resources:[{name:"Testbook Mocks",url:"https://testbook.com"},{name:"Oliveboard",url:"https://www.oliveboard.in"}]},
+    ]
+  },
+  {
+    id:"swe", icon:"💼", title:"Software Engineer (MNC)", demand:8, difficulty:7, time:"6–12 Months", salary:"₹5L–18L",
+    hot:false, tags:["DSA","System Design","Interviews"],
+    desc:"Get into TCS, Infosys, Wipro, or aim for service-based to product-based migration. DSA is the key.",
+    insights:{salary:"₹5L–18L",remote:"Hybrid",growth:"High",competition:"Very High",difficulty:7,demand:8},
+    roadmap:[
+      {name:"Core CS Subjects",time:"4 Weeks",desc:"OS, DBMS, CN, OOP — these four are asked in every campus/off-campus interview.", skills:["OS","DBMS","Computer Networks","OOP","C++/Java"],resources:[{name:"GeeksforGeeks",url:"https://www.geeksforgeeks.org"},{name:"InterviewBit",url:"https://www.interviewbit.com"}]},
+      {name:"Data Structures & Algorithms",time:"8 Weeks",desc:"Arrays, strings, trees, graphs, DP, sorting, searching. 150 LeetCode problems minimum.", skills:["Arrays","Linked Lists","Trees","Graphs","Dynamic Programming","Sorting"],resources:[{name:"LeetCode",url:"https://leetcode.com"},{name:"Striver's DSA Sheet",url:"https://takeuforward.org/interviews/strivers-sde-sheet-top-coding-interview-problems/"}]},
+      {name:"System Design Basics",time:"2 Weeks",desc:"For 2+ year experience roles. Load balancers, databases, caching, scalability.", skills:["Load Balancing","Caching","Microservices","CAP Theorem","APIs"],resources:[{name:"System Design Primer",url:"https://github.com/donnemartin/system-design-primer"}]},
+      {name:"Projects & GitHub",time:"3 Weeks",desc:"2–3 solid projects with clean code, README, and live demo.", skills:["Project architecture","Git","README","Live demo"],resources:[{name:"GitHub",url:"https://github.com"}]},
+      {name:"Interview Preparation",time:"4 Weeks",desc:"Mock interviews on Pramp, Interviewing.io. Behavioral prep (STAR method).", skills:["Mock Interviews","STAR Method","Communication","HR rounds"],resources:[{name:"Pramp",url:"https://www.pramp.com"},{name:"Interviewing.io",url:"https://interviewing.io"}]},
+    ]
+  },
+  {
+    id:"backend", icon:"🛠️", title:"Backend Developer", demand:8, difficulty:7, time:"6–9 Months", salary:"₹5L–16L",
+    hot:false, tags:["Node.js","Python","APIs"],
+    desc:"Build the engine of the web. APIs, databases, authentication, servers — the foundation every product runs on.",
+    insights:{salary:"₹5L–16L",remote:"Very High",growth:"High",competition:"Moderate",difficulty:7,demand:8},
+    roadmap:[
+      {name:"Programming Language",time:"3 Weeks",desc:"Pick one: Python (Django/FastAPI), Node.js, or Java (Spring Boot). Go deep, not wide.", skills:["Python","Node.js","Java","OOP","Error handling"],resources:[{name:"Python.org",url:"https://www.python.org"},{name:"Node.js Docs",url:"https://nodejs.org/docs"}]},
+      {name:"REST APIs",time:"3 Weeks",desc:"Design, build, and test REST APIs. CRUD, status codes, versioning, pagination.", skills:["REST","CRUD","HTTP","Postman","API design"],resources:[{name:"Postman Learning",url:"https://learning.postman.com"},{name:"FastAPI Docs",url:"https://fastapi.tiangolo.com"}]},
+      {name:"Databases",time:"3 Weeks",desc:"SQL + NoSQL. Design schemas, write queries, understand indexing and transactions.", skills:["PostgreSQL","MongoDB","SQL","Indexing","Transactions","ORM"],resources:[{name:"PostgreSQL Docs",url:"https://www.postgresql.org/docs"},{name:"MongoDB University",url:"https://university.mongodb.com"}]},
+      {name:"Auth & Security",time:"2 Weeks",desc:"JWT, OAuth2, bcrypt, rate limiting, input validation. Don't deploy without this.", skills:["JWT","OAuth2","bcrypt","Rate limiting","CORS","Input validation"],resources:[{name:"OWASP Cheat Sheets",url:"https://cheatsheetseries.owasp.org"}]},
+      {name:"Deployment & Infra",time:"2 Weeks",desc:"Docker, Nginx, cloud hosting. Get your API live and https.", skills:["Docker","Nginx","Railway","Render","SSL","Environment variables"],resources:[{name:"Railway",url:"https://railway.app"},{name:"Render Docs",url:"https://render.com/docs"}]},
+      {name:"System Design",time:"2 Weeks",desc:"Caching (Redis), message queues (RabbitMQ/Kafka), microservices basics.", skills:["Redis","Caching","Message queues","Microservices","Scalability"],resources:[{name:"System Design Primer",url:"https://github.com/donnemartin/system-design-primer"}]},
+    ]
+  },
+];
+
+/* ══ PROGRESS STATE ══ */
+var progress = {};
+try{ progress = JSON.parse(localStorage.getItem("bca-progress")||"{}"); }catch(e){}
+function saveProgress(){ try{localStorage.setItem("bca-progress",JSON.stringify(progress));}catch(e){} }
+
+/* ══ RENDER CAREERS GRID ══ */
+function renderCareers(){
+  var grid = document.getElementById("careersGrid");
+  grid.innerHTML = "";
+  CAREERS.forEach(function(c){
+    var d = Math.round((c.demand/10)*100);
+    var di = Math.round((c.difficulty/10)*100);
+    var demandColor = c.demand>=8?"#dc143c":c.demand>=6?"#eab308":"#3b82f6";
+    var diffColor = c.difficulty>=8?"#dc143c":c.difficulty>=6?"#eab308":"#22c55e";
+    var card = document.createElement("div");
+    card.className = "career-card" + (c.hot?" hot":"");
+    card.innerHTML =
+      '<div class="cc-top">'+
+        '<span class="cc-icon">'+c.icon+'</span>'+
+        '<div class="cc-info">'+
+          '<div class="cc-title">'+c.title+'</div>'+
+          '<div class="cc-demand">'+c.time+' · '+c.salary+'</div>'+
+        '</div>'+
+      '</div>'+
+      '<div class="cc-bars">'+
+        '<div class="cc-bar-row"><span class="cc-bar-label">DEMAND</span><div class="cc-bar-track"><div class="cc-bar-fill" style="width:0%;background:'+demandColor+'" data-w="'+d+'"></div></div><span class="cc-bar-val">'+c.demand+'/10</span></div>'+
+        '<div class="cc-bar-row"><span class="cc-bar-label">DIFFICULTY</span><div class="cc-bar-track"><div class="cc-bar-fill" style="width:0%;background:'+diffColor+'" data-w="'+di+'"></div></div><span class="cc-bar-val">'+c.difficulty+'/10</span></div>'+
+      '</div>'+
+      '<div class="cc-meta">'+c.tags.map(function(t){return'<span class="cc-tag">'+t+'</span>';}).join('')+'</div>'+
+      '<div style="font-family:var(--mono);font-size:9px;color:var(--muted);margin-top:10px;line-height:1.7;letter-spacing:.3px;">'+c.desc+'</div>'+
+      '<span class="cc-arrow">↗</span>';
+    card.addEventListener("click",function(){ openRoadmap(c.id); });
+    grid.appendChild(card);
+  });
+  // animate bars after mount
+  setTimeout(function(){
+    document.querySelectorAll(".cc-bar-fill").forEach(function(b){
+      b.style.width = b.getAttribute("data-w")+"%";
+    });
+  },100);
+}
+
+/* ══ ROADMAP ══ */
+var currentCareer = null;
+function openRoadmap(id){
+  currentCareer = CAREERS.find(function(c){ return c.id===id; });
+  if(!currentCareer) return;
+  renderRoadmap();
+  showView("roadmapView");
+}
+
+function getProgress(careerId){
+  return progress[careerId] || {};
+}
+
+function renderRoadmap(){
+  var c = currentCareer;
+  document.getElementById("rmTitle").textContent = c.icon+" "+c.title;
+  document.getElementById("rmSub").textContent = c.time+" · "+c.salary;
+
+  var p = getProgress(c.id);
+  var doneCount = Object.keys(p).filter(function(k){ return p[k]; }).length;
+  var total = c.roadmap.length;
+  var pct = Math.round((doneCount/total)*100);
+
+  // Timeline
+  var tl = document.getElementById("roadmapTimeline");
+  tl.innerHTML = "";
+  c.roadmap.forEach(function(step, i){
+    var isDone = !!p[i];
+    var isCurrent = !isDone && (i===0 || !!p[i-1]);
+    var cls = "rm-step"+(isDone?" done":isCurrent?" current":"");
+    var badgeCls = isDone?"badge-done":isCurrent?"badge-current":"badge-locked";
+    var badgeTxt = isDone?"✓ Done":isCurrent?"▶ Up Next":"Locked";
+
+    var div = document.createElement("div");
+    div.className = cls;
+    div.innerHTML =
+      '<div class="rm-step-card" onclick="toggleStep(this)">'+
+        '<div class="rm-step-top">'+
+          '<div class="rm-step-left">'+
+            '<span class="rm-step-num">'+(i+1<10?"0"+(i+1):(i+1))+'</span>'+
+            '<span class="rm-step-name">'+step.name+'</span>'+
+          '</div>'+
+          '<div style="display:flex;align-items:center;gap:8px;">'+
+            '<span class="rm-step-time">'+step.time+'</span>'+
+            '<span class="rm-step-badge '+badgeCls+'">'+badgeTxt+'</span>'+
+          '</div>'+
+        '</div>'+
+        '<div class="rm-step-body" id="step-body-'+i+'">'+
+          '<div class="rm-step-content">'+
+            '<p class="rm-step-desc">'+step.desc+'</p>'+
+            '<div class="rm-skills-list">'+step.skills.map(function(s){return'<span class="skill-pill">'+s+'</span>';}).join('')+'</div>'+
+            '<div class="rm-resources">RESOURCES</div>'+
+            '<div class="rm-res-links">'+step.resources.map(function(r){return'<a class="rm-res-link" href="'+r.url+'" target="_blank" rel="noopener">↗ '+r.name+'</a>';}).join('')+'</div>'+
+            '<button class="rm-mark-btn '+(isDone?'rm-mark-undone':'rm-mark-done')+'" data-step="'+i+'">'+
+              (isDone?'↩ Mark as Not Done':'✓ Mark as Done')+
+            '</button>'+
+          '</div>'+
+        '</div>'+
+      '</div>';
+    div.querySelector(".rm-mark-btn").addEventListener("click", function(e){
+      e.stopPropagation();
+      var si = parseInt(this.getAttribute("data-step"));
+      if(!progress[c.id]) progress[c.id]={};
+      progress[c.id][si] = !progress[c.id][si];
+      saveProgress();
+      renderRoadmap();
+    });
+    tl.appendChild(div);
+  });
+
+  // Insights
+  var ins = document.getElementById("rmInsights");
+  var rows = [
+    {label:"Avg Salary",val:c.insights.salary,pct:null},
+    {label:"Remote Work",val:c.insights.remote,pct:null},
+    {label:"Job Growth",val:c.insights.growth,pct:null},
+    {label:"Competition",val:c.insights.competition,pct:null},
+    {label:"Demand",val:""+c.insights.demand+"/10",pct:Math.round(c.insights.demand/10*100),color:"#dc143c"},
+    {label:"Difficulty",val:""+c.insights.difficulty+"/10",pct:Math.round(c.insights.difficulty/10*100),color:c.insights.difficulty>=8?"#dc143c":c.insights.difficulty>=6?"#eab308":"#22c55e"},
+  ];
+  ins.innerHTML = '<div class="rm-insights-title">CAREER INSIGHTS</div>'+
+    rows.map(function(r){
+      return '<div style="margin-bottom:12px;">'+
+        '<div class="insight-row"><span class="insight-label">'+r.label+'</span><span class="insight-val">'+r.val+'</span></div>'+
+        (r.pct!==null?'<div class="insight-bar"><div class="insight-fill" style="width:'+r.pct+'%;background:'+r.color+'"></div></div>':'')+
+      '</div>';
+    }).join('');
+
+  // Progress ring
+  var prog = document.getElementById("rmProgress");
+  var r = 38, circ = 2*Math.PI*r;
+  var offset = circ - (pct/100)*circ;
+  prog.innerHTML =
+    '<div class="progress-title">YOUR PROGRESS</div>'+
+    '<div class="progress-ring-wrap">'+
+      '<svg class="progress-ring-svg" width="92" height="92" viewBox="0 0 92 92">'+
+        '<circle cx="46" cy="46" r="38" fill="none" stroke="rgba(255,255,255,0.07)" stroke-width="5"/>'+
+        '<circle cx="46" cy="46" r="38" fill="none" stroke="#dc143c" stroke-width="5" stroke-linecap="round"'+
+          ' stroke-dasharray="'+circ+'" stroke-dashoffset="'+offset+'" transform="rotate(-90 46 46)"'+
+          ' style="transition:stroke-dashoffset .8s ease"/>'+
+      '</svg>'+
+      '<div class="progress-ring-info">'+
+        '<div class="progress-ring-pct">'+pct+'%</div>'+
+        '<div class="progress-ring-lbl">'+doneCount+' / '+total+' STEPS</div>'+
+      '</div>'+
+    '</div>'+
+    '<div class="xp-bar-wrap">'+
+      '<div class="xp-label"><span>XP</span><span>'+doneCount*150+' / '+total*150+'</span></div>'+
+      '<div class="xp-track"><div class="xp-fill" style="width:'+(doneCount/total*100)+'%"></div></div>'+
+    '</div>'+
+    '<div class="badges-grid">'+
+      c.roadmap.map(function(s,i){
+        return '<span class="badge-item'+(!!p[i]?" earned":"")+'">'+s.name.split(" ")[0]+'</span>';
+      }).join('')+
+    '</div>';
+}
+
+function toggleStep(card){
+  var body = card.querySelector(".rm-step-body");
+  body.classList.toggle("open");
+}
+
+/* ══ QUIZ ══ */
+var QUIZ_QUESTIONS = [
+  {q:"Do you enjoy writing code and solving logic problems?", key:"coding"},
+  {q:"Do you enjoy visual design — colors, layout, typography?", key:"design"},
+  {q:"Do you enjoy finding loopholes, puzzles, and breaking things?", key:"security"},
+  {q:"Are you comfortable with Linux terminals and command lines?", key:"infra"},
+  {q:"Do you enjoy working with data — spotting patterns and trends?", key:"data"},
+  {q:"Do you prefer building products and talking to users?", key:"product"},
+  {q:"Are you motivated by stability over high risk/reward?", key:"stability"},
+  {q:"Do you want to be your own boss and work independently?", key:"independent"},
+];
+var quizAnswers = {};
+var quizStep = 0;
+
+function renderQuiz(){
+  var card = document.getElementById("quizCard");
+  if(quizStep < QUIZ_QUESTIONS.length){
+    var q = QUIZ_QUESTIONS[quizStep];
+    card.innerHTML =
+      '<div class="quiz-phase">QUESTION '+(quizStep+1)+' OF '+QUIZ_QUESTIONS.length+'</div>'+
+      '<div class="quiz-q">'+q.q+'</div>'+
+      '<div class="quiz-opts">'+
+        ['Definitely Yes','Mostly Yes','Somewhat','Not Really','Definitely Not'].map(function(o,i){
+          var sel = quizAnswers[q.key]===i?" selected":"";
+          return '<button class="quiz-opt-btn'+sel+'" data-val="'+i+'" onclick="selectQuizOpt(\''+q.key+'\','+i+',this)">'+o+'</button>';
+        }).join('')+
+      '</div>'+
+      '<div class="quiz-nav">'+
+        '<span class="quiz-prog">'+Math.round((quizStep/QUIZ_QUESTIONS.length)*100)+'% complete</span>'+
+        (quizStep>0?'<button class="btn-ghost" style="font-size:11px;padding:8px 16px;" onclick="quizPrev()">← Back</button>':'')+
+        '<button class="btn-primary" style="font-size:11px;padding:8px 18px;" onclick="quizNext()">'+
+          (quizStep===QUIZ_QUESTIONS.length-1?'See Results →':'Next →')+
+        '</button>'+
+      '</div>';
+  } else {
+    renderQuizResult();
+  }
+}
+
+function selectQuizOpt(key,val,el){
+  quizAnswers[key]=val;
+  el.closest(".quiz-opts").querySelectorAll(".quiz-opt-btn").forEach(function(b){ b.classList.remove("selected"); });
+  el.classList.add("selected");
+}
+
+function quizNext(){
+  var q = QUIZ_QUESTIONS[quizStep];
+  if(quizAnswers[q.key]===undefined){ quizAnswers[q.key]=2; }
+  quizStep++;
+  renderQuiz();
+}
+function quizPrev(){ quizStep = Math.max(0,quizStep-1); renderQuiz(); }
+
+function scoreCareer(c, ans){
+  var score = 0;
+  var id = c.id;
+  if(["webdev","fullstack","backend","swe"].includes(id)) score += (4-ans.coding)*2;
+  if(["uiux","freelance"].includes(id)){ score += (4-ans.design)*2; score += (4-(ans.coding||2))*1; }
+  if(["cybersec"].includes(id)){ score += (4-ans.security)*2; score += (4-ans.infra)*1; }
+  if(["devops","cloud"].includes(id)){ score += (4-ans.infra)*2; score += (4-ans.coding)*1; }
+  if(["ml","data"].includes(id)){ score += (4-ans.data)*2; score += (4-ans.coding)*1; }
+  if(["android"].includes(id)){ score += (4-ans.coding)*2; }
+  if(["entrepreneur","freelance"].includes(id)){ score += (4-ans.independent)*2; }
+  if(["govtjobs","mca"].includes(id)){ score += (4-ans.stability)*2; }
+  if(["swe","mca"].includes(id)){ score += (4-(ans.coding||2))*1; }
+  return score;
+}
+
+function renderQuizResult(){
+  var scored = CAREERS.map(function(c){ return {c:c, score:scoreCareer(c,quizAnswers)}; });
+  scored.sort(function(a,b){ return b.score-a.score; });
+  var top3 = scored.slice(0,3);
+  var card = document.getElementById("quizCard");
+  card.innerHTML =
+    '<div class="quiz-result">'+
+      '<div class="quiz-result-title">Your Top Matches</div>'+
+      '<div class="quiz-result-sub">Based on your answers — click any to view its roadmap.</div>'+
+      '<div class="rec-cards">'+
+        top3.map(function(item,i){
+          var c = item.c;
+          return '<div class="rec-card" onclick="openRoadmap(\''+c.id+'\')">'+
+            '<span class="rec-rank">'+(i+1)+'</span>'+
+            '<div class="rec-info">'+
+              '<div class="rec-title">'+c.icon+' '+c.title+'</div>'+
+              '<div class="rec-reason">'+c.time+' · '+c.salary+'</div>'+
+            '</div>'+
+            '<span style="color:var(--accent);font-family:var(--mono);font-size:11px;">View Roadmap →</span>'+
+          '</div>';
+        }).join('')+
+      '</div>'+
+      '<button class="btn-ghost" onclick="restartQuiz()">↺ Retake Quiz</button>'+
+    '</div>';
+}
+
+function restartQuiz(){ quizAnswers={}; quizStep=0; renderQuiz(); }
+
+/* ══ READINESS CALCULATOR ══ */
+var READINESS_SKILLS = [
+  {id:"html",label:"HTML",weight:4},{id:"css",label:"CSS / Tailwind",weight:4},
+  {id:"js",label:"JavaScript",weight:6},{id:"react",label:"React / Vue",weight:7},
+  {id:"node",label:"Node.js / Backend",weight:7},{id:"python",label:"Python",weight:6},
+  {id:"sql",label:"SQL / Databases",weight:6},{id:"git",label:"Git & GitHub",weight:5},
+  {id:"linux",label:"Linux / Terminal",weight:4},{id:"docker",label:"Docker",weight:5},
+  {id:"dsa",label:"DSA / LeetCode",weight:7},{id:"api",label:"REST API design",weight:5},
+  {id:"deploy",label:"Deployed projects",weight:6},{id:"portfolio",label:"Portfolio / GitHub",weight:6},
+  {id:"comm",label:"English communication",weight:4},{id:"resume",label:"Resume ready",weight:5},
+];
+var checkedSkills = {};
+
+function renderReadiness(){
+  var wrap = document.getElementById("readinessWrap");
+  var totalWeight = READINESS_SKILLS.reduce(function(a,s){ return a+s.weight; },0);
+  var earnedWeight = READINESS_SKILLS.reduce(function(a,s){ return a+(checkedSkills[s.id]?s.weight:0); },0);
+  var pct = Math.round((earnedWeight/totalWeight)*100);
+  var verdict = pct>=80?"You're job-ready. Start applying now.":pct>=60?"Almost there. Fill the gaps below.":pct>=40?"Getting there. Keep building.":"Lots to learn — but you know exactly what to do now.";
+  var missColor = pct>=80?"#22c55e":pct>=60?"#eab308":"#dc143c";
+
+  var missing = READINESS_SKILLS.filter(function(s){ return !checkedSkills[s.id]; });
+
+  wrap.innerHTML =
+    '<p style="font-size:13px;color:var(--muted);margin-bottom:24px;line-height:1.8;">Check off every skill you currently have. Your job readiness score updates in real time.</p>'+
+    '<div class="skills-selector-grid" id="skillsGrid">'+
+      READINESS_SKILLS.map(function(s){
+        var chk = checkedSkills[s.id]?" checked":"";
+        return '<label class="skill-toggle'+chk+'">'+
+          '<input type="checkbox" data-id="'+s.id+'" '+(checkedSkills[s.id]?"checked":"")+' onchange="toggleSkill(\''+s.id+'\')">'+
+          '<span class="skill-toggle-icon">'+(checkedSkills[s.id]?"✓":"")+'</span>'+
+          '<span class="skill-toggle-label">'+s.label+'</span>'+
+        '</label>';
+      }).join('')+
+    '</div>'+
+    '<div class="readiness-result">'+
+      '<div class="readiness-score-row">'+
+        '<div>'+
+          '<div class="readiness-pct" style="color:'+missColor+'">'+pct+'%</div>'+
+          '<div class="readiness-label">JOB READINESS</div>'+
+        '</div>'+
+        '<div>'+
+          '<div class="readiness-verdict">'+verdict+'</div>'+
+          '<div class="readiness-next">'+earnedWeight+' / '+totalWeight+' skill points unlocked</div>'+
+        '</div>'+
+      '</div>'+
+      '<div class="readiness-track"><div class="readiness-fill" style="width:'+pct+'%;background:linear-gradient(90deg,'+missColor+',rgba(220,20,60,0.5))"></div></div>'+
+      (missing.length>0?
+        '<div class="missing-skills-wrap">'+
+          '<div class="missing-title">SKILLS TO ACQUIRE</div>'+
+          '<div class="missing-list">'+missing.map(function(s){ return '<span class="missing-pill">'+s.label+'</span>'; }).join('')+'</div>'+
+        '</div>':
+        '<div style="font-family:var(--mono);font-size:12px;color:var(--green);letter-spacing:1px;padding:8px 0;">🎉 All skills checked! Time to apply.</div>'
+      )+
+    '</div>';
+}
+
+function toggleSkill(id){
+  checkedSkills[id] = !checkedSkills[id];
+  renderReadiness();
+}
+
+/* ══ INIT ══ */
+renderCareers();
+renderQuiz();
+renderReadiness();
+</script>
+</body>
+</html>
