@@ -8,6 +8,208 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
+  <style>
+    /* ── LIFE AFTER BCA BANNER ── */
+    .lab-banner {
+      max-width:     880px;
+      margin:        0 auto;
+      padding:       0 48px;
+      margin-top:    52px;
+    }
+
+    .lab-card {
+      position:        relative;
+      border-radius:   16px;
+      overflow:        hidden;
+      border:          0.5px solid rgba(220, 20, 60, 0.35);
+      background:      rgba(220, 20, 60, 0.04);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      box-shadow:      0 4px 40px rgba(220, 20, 60, 0.10),
+                       inset 0 1px 0 rgba(255, 255, 255, 0.06);
+      display:         flex;
+      align-items:     stretch;
+      gap:             0;
+      transition:      border-color 0.25s, box-shadow 0.25s;
+    }
+
+    .lab-card:hover {
+      border-color: rgba(220, 20, 60, 0.60);
+      box-shadow:   0 8px 56px rgba(220, 20, 60, 0.18),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    }
+
+    /* Left accent stripe */
+    .lab-stripe {
+      width:       4px;
+      flex-shrink: 0;
+      background:  linear-gradient(180deg, #dc143c 0%, rgba(220, 20, 60, 0.30) 100%);
+      box-shadow:  4px 0 24px rgba(220, 20, 60, 0.25);
+    }
+
+    /* Ambient glow blob */
+    .lab-card::before {
+      content:        '';
+      position:       absolute;
+      top:            -60px;
+      right:          -60px;
+      width:          280px;
+      height:         280px;
+      background:     radial-gradient(circle, rgba(220, 20, 60, 0.09) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .lab-body {
+      flex:       1;
+      padding:    28px 28px 28px 28px;
+      display:    flex;
+      align-items: center;
+      justify-content: space-between;
+      gap:        24px;
+      position:   relative;
+      z-index:    1;
+    }
+
+    .lab-left { flex: 1; min-width: 0; }
+
+    .lab-eyebrow {
+      font-family:    var(--mono);
+      font-size:      9px;
+      letter-spacing: 3px;
+      color:          var(--accent);
+      margin-bottom:  10px;
+      display:        flex;
+      align-items:    center;
+      gap:            8px;
+    }
+    .lab-eyebrow::before {
+      content:    '';
+      width:      18px;
+      height:     1px;
+      background: var(--accent);
+      opacity:    0.6;
+      flex-shrink: 0;
+    }
+
+    .lab-title {
+      font-family:    var(--mono);
+      font-size:      22px;
+      font-weight:    800;
+      color:          var(--text);
+      letter-spacing: -0.5px;
+      margin-bottom:  8px;
+      line-height:    1.15;
+    }
+    .lab-title .lab-accent { color: var(--accent); }
+
+    .lab-desc {
+      font-size:   12px;
+      color:       var(--muted);
+      line-height: 1.8;
+      max-width:   440px;
+    }
+
+    .lab-pills {
+      display:    flex;
+      gap:        7px;
+      margin-top: 14px;
+      flex-wrap:  wrap;
+    }
+    .lab-pill {
+      font-family:    var(--mono);
+      font-size:      9px;
+      color:          var(--muted);
+      border:         0.5px solid var(--border-mid);
+      padding:        3px 9px;
+      border-radius:  4px;
+      background:     rgba(255, 255, 255, 0.04);
+      letter-spacing: 0.5px;
+    }
+    .lab-pill.hot {
+      color:      var(--accent);
+      border-color: rgba(220, 20, 60, 0.35);
+      background: rgba(220, 20, 60, 0.07);
+    }
+
+    .lab-right {
+      flex-shrink: 0;
+      display:     flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap:         14px;
+    }
+
+    .lab-stats {
+      display:    flex;
+      gap:        20px;
+    }
+    .lab-stat {
+      text-align: center;
+    }
+    .lab-stat-val {
+      font-family: var(--mono);
+      font-size:   20px;
+      font-weight: 800;
+      color:       var(--accent);
+      display:     block;
+      line-height: 1;
+    }
+    .lab-stat-lbl {
+      font-family:    var(--mono);
+      font-size:      8px;
+      color:          var(--muted);
+      letter-spacing: 1.5px;
+      margin-top:     4px;
+      display:        block;
+    }
+
+    .lab-cta {
+      display:         inline-flex;
+      align-items:     center;
+      gap:             8px;
+      font-family:     var(--mono);
+      font-size:       11px;
+      font-weight:     700;
+      letter-spacing:  1.5px;
+      color:           #fff;
+      background:      linear-gradient(135deg, rgba(220,20,60,0.92), rgba(200,10,40,0.80));
+      padding:         11px 22px;
+      text-decoration: none;
+      border-radius:   6px;
+      border:          0.5px solid rgba(220, 20, 60, 0.55);
+      transition:      transform 0.15s, box-shadow 0.2s;
+      box-shadow:      0 4px 20px rgba(220, 20, 60, 0.28),
+                       inset 0 1px 0 rgba(255,255,255,0.10);
+      white-space:     nowrap;
+    }
+    .lab-cta:hover {
+      transform:  translateY(-2px);
+      box-shadow: 0 8px 32px rgba(220, 20, 60, 0.44),
+                  inset 0 1px 0 rgba(255,255,255,0.12);
+    }
+
+    /* Arrow icon */
+    .lab-arrow {
+      font-size:    18px;
+      color:        var(--accent);
+      opacity:      0.5;
+      transition:   opacity 0.2s, transform 0.2s;
+      user-select:  none;
+    }
+    .lab-card:hover .lab-arrow {
+      opacity:   1;
+      transform: translateX(4px);
+    }
+
+    @media (max-width: 760px) {
+      .lab-banner  { padding: 0 20px; margin-top: 36px; }
+      .lab-body    { flex-direction: column; align-items: flex-start; padding: 22px 20px; }
+      .lab-right   { align-items: flex-start; flex-direction: row; align-items: center; flex-wrap: wrap; }
+      .lab-stats   { gap: 14px; }
+      .lab-title   { font-size: 18px; }
+      .lab-arrow   { display: none; }
+    }
+  </style>
 </head>
 <body>
 
@@ -79,8 +281,55 @@
     </div>
   </section>
 
-  <!-- STYLISH GLOWING DIVIDER -->
+  <!-- GLOWING DIVIDER -->
   <div class="hero-divider"></div>
+
+  <!-- ══════════════════════════════════════════
+       LIFE AFTER BCA BANNER
+       Placed here: first thing after the hero,
+       before notes — equal weight, not afterthought
+  ══════════════════════════════════════════ -->
+  <div class="lab-banner">
+    <a href="life-after-bca.html" class="lab-card" style="text-decoration:none;">
+      <div class="lab-stripe"></div>
+      <div class="lab-body">
+        <div class="lab-left">
+          <div class="lab-eyebrow">// NEW · CAREER EXPLORER</div>
+          <div class="lab-title">
+            Life After <span class="lab-accent">BCA</span>
+          </div>
+          <div class="lab-desc">
+            15 career paths. Interactive roadmaps. Personalized quiz. Job readiness score.
+            Know exactly where you're headed — and what to do next.
+          </div>
+          <div class="lab-pills">
+            <span class="lab-pill hot">🔥 Roadmaps</span>
+            <span class="lab-pill hot">Career Quiz</span>
+            <span class="lab-pill">₹4L – ₹30L+ Salaries</span>
+            <span class="lab-pill">15 Paths</span>
+            <span class="lab-pill">Free</span>
+          </div>
+        </div>
+
+        <div class="lab-right">
+          <div class="lab-stats">
+            <div class="lab-stat">
+              <span class="lab-stat-val">15</span>
+              <span class="lab-stat-lbl">CAREERS</span>
+            </div>
+            <div class="lab-stat">
+              <span class="lab-stat-val">60+</span>
+              <span class="lab-stat-lbl">STEPS</span>
+            </div>
+          </div>
+          <span class="lab-cta">Explore Careers ↗</span>
+        </div>
+
+        <div class="lab-arrow">›</div>
+      </div>
+    </a>
+  </div>
+  <!-- ══ END LIFE AFTER BCA BANNER ══ -->
 
   <!-- SEMESTERS -->
   <main class="container" id="semesters">
