@@ -8,206 +8,316 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
+
   <style>
-    /* ── LIFE AFTER BCA BANNER ── */
-    .lab-banner {
-      max-width:     880px;
-      margin:        0 auto;
-      padding:       0 48px;
-      margin-top:    52px;
+    /* ──────────────────────────────────────────────
+       LIFE AFTER BCA BANNER (unchanged)
+    ────────────────────────────────────────────── */
+    .lab-banner{max-width:880px;margin:52px auto 0;padding:0 48px;}
+    .lab-card{position:relative;border-radius:16px;overflow:hidden;border:.5px solid rgba(220,20,60,.35);background:rgba(220,20,60,.04);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);box-shadow:0 4px 40px rgba(220,20,60,.10),inset 0 1px 0 rgba(255,255,255,.06);display:flex;align-items:stretch;transition:border-color .25s,box-shadow .25s;}
+    .lab-card:hover{border-color:rgba(220,20,60,.60);box-shadow:0 8px 56px rgba(220,20,60,.18),inset 0 1px 0 rgba(255,255,255,.08);}
+    .lab-card::before{content:'';position:absolute;top:-60px;right:-60px;width:280px;height:280px;background:radial-gradient(circle,rgba(220,20,60,.09) 0%,transparent 70%);pointer-events:none;}
+    .lab-stripe{width:4px;flex-shrink:0;background:linear-gradient(180deg,#dc143c 0%,rgba(220,20,60,.30) 100%);box-shadow:4px 0 24px rgba(220,20,60,.25);}
+    .lab-body{flex:1;padding:28px;display:flex;align-items:center;justify-content:space-between;gap:24px;position:relative;z-index:1;}
+    .lab-left{flex:1;min-width:0;}
+    .lab-eyebrow{font-family:var(--mono);font-size:9px;letter-spacing:3px;color:var(--accent);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+    .lab-eyebrow::before{content:'';width:18px;height:1px;background:var(--accent);opacity:.6;flex-shrink:0;}
+    .lab-title{font-family:var(--mono);font-size:22px;font-weight:800;color:var(--text);letter-spacing:-.5px;margin-bottom:8px;line-height:1.15;}
+    .lab-title .lab-accent{color:var(--accent);}
+    .lab-desc{font-size:12px;color:var(--muted);line-height:1.8;max-width:440px;}
+    .lab-pills{display:flex;gap:7px;margin-top:14px;flex-wrap:wrap;}
+    .lab-pill{font-family:var(--mono);font-size:9px;color:var(--muted);border:.5px solid var(--border-mid);padding:3px 9px;border-radius:4px;background:rgba(255,255,255,.04);letter-spacing:.5px;}
+    .lab-pill.hot{color:var(--accent);border-color:rgba(220,20,60,.35);background:rgba(220,20,60,.07);}
+    .lab-right{flex-shrink:0;display:flex;flex-direction:column;align-items:flex-end;gap:14px;}
+    .lab-stats{display:flex;gap:20px;}
+    .lab-stat{text-align:center;}
+    .lab-stat-val{font-family:var(--mono);font-size:20px;font-weight:800;color:var(--accent);display:block;line-height:1;}
+    .lab-stat-lbl{font-family:var(--mono);font-size:8px;color:var(--muted);letter-spacing:1.5px;margin-top:4px;display:block;}
+    .lab-cta{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:1.5px;color:#fff;background:linear-gradient(135deg,rgba(220,20,60,.92),rgba(200,10,40,.80));padding:11px 22px;text-decoration:none;border-radius:6px;border:.5px solid rgba(220,20,60,.55);transition:transform .15s,box-shadow .2s;box-shadow:0 4px 20px rgba(220,20,60,.28),inset 0 1px 0 rgba(255,255,255,.10);white-space:nowrap;}
+    .lab-cta:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(220,20,60,.44),inset 0 1px 0 rgba(255,255,255,.12);}
+    .lab-arrow{font-size:18px;color:var(--accent);opacity:.5;transition:opacity .2s,transform .2s;user-select:none;}
+    .lab-card:hover .lab-arrow{opacity:1;transform:translateX(4px);}
+    @media(max-width:760px){
+      .lab-banner{padding:0 20px;margin-top:36px;}
+      .lab-body{flex-direction:column;align-items:flex-start;padding:22px 20px;}
+      .lab-right{flex-direction:row;align-items:center;flex-wrap:wrap;}
+      .lab-stats{gap:14px;}
+      .lab-title{font-size:18px;}
+      .lab-arrow{display:none;}
     }
+  </style>
 
-    .lab-card {
-      position:        relative;
-      border-radius:   16px;
-      overflow:        hidden;
-      border:          0.5px solid rgba(220, 20, 60, 0.35);
-      background:      rgba(220, 20, 60, 0.04);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      box-shadow:      0 4px 40px rgba(220, 20, 60, 0.10),
-                       inset 0 1px 0 rgba(255, 255, 255, 0.06);
-      display:         flex;
-      align-items:     stretch;
-      gap:             0;
-      transition:      border-color 0.25s, box-shadow 0.25s;
-    }
+  <style>
+    /* ══════════════════════════════════════════════════════════
+       SKULL BUTTON — floating circular, pill-expands on hover,
+       lives in the bottom-right dock beside the music player.
+    ══════════════════════════════════════════════════════════ */
 
-    .lab-card:hover {
-      border-color: rgba(220, 20, 60, 0.60);
-      box-shadow:   0 8px 56px rgba(220, 20, 60, 0.18),
-                    inset 0 1px 0 rgba(255, 255, 255, 0.08);
-    }
-
-    /* Left accent stripe */
-    .lab-stripe {
-      width:       4px;
-      flex-shrink: 0;
-      background:  linear-gradient(180deg, #dc143c 0%, rgba(220, 20, 60, 0.30) 100%);
-      box-shadow:  4px 0 24px rgba(220, 20, 60, 0.25);
-    }
-
-    /* Ambient glow blob */
-    .lab-card::before {
-      content:        '';
-      position:       absolute;
-      top:            -60px;
-      right:          -60px;
-      width:          280px;
-      height:         280px;
-      background:     radial-gradient(circle, rgba(220, 20, 60, 0.09) 0%, transparent 70%);
-      pointer-events: none;
-    }
-
-    .lab-body {
-      flex:       1;
-      padding:    28px 28px 28px 28px;
+    /* Bottom-right dock: stacks music player + skull button */
+    .bottom-dock {
+      position:   fixed;
+      bottom:     24px;
+      right:      24px;
+      z-index:    200;
       display:    flex;
-      align-items: center;
-      justify-content: space-between;
-      gap:        24px;
-      position:   relative;
-      z-index:    1;
-    }
-
-    .lab-left { flex: 1; min-width: 0; }
-
-    .lab-eyebrow {
-      font-family:    var(--mono);
-      font-size:      9px;
-      letter-spacing: 3px;
-      color:          var(--accent);
-      margin-bottom:  10px;
-      display:        flex;
-      align-items:    center;
-      gap:            8px;
-    }
-    .lab-eyebrow::before {
-      content:    '';
-      width:      18px;
-      height:     1px;
-      background: var(--accent);
-      opacity:    0.6;
-      flex-shrink: 0;
-    }
-
-    .lab-title {
-      font-family:    var(--mono);
-      font-size:      22px;
-      font-weight:    800;
-      color:          var(--text);
-      letter-spacing: -0.5px;
-      margin-bottom:  8px;
-      line-height:    1.15;
-    }
-    .lab-title .lab-accent { color: var(--accent); }
-
-    .lab-desc {
-      font-size:   12px;
-      color:       var(--muted);
-      line-height: 1.8;
-      max-width:   440px;
-    }
-
-    .lab-pills {
-      display:    flex;
-      gap:        7px;
-      margin-top: 14px;
-      flex-wrap:  wrap;
-    }
-    .lab-pill {
-      font-family:    var(--mono);
-      font-size:      9px;
-      color:          var(--muted);
-      border:         0.5px solid var(--border-mid);
-      padding:        3px 9px;
-      border-radius:  4px;
-      background:     rgba(255, 255, 255, 0.04);
-      letter-spacing: 0.5px;
-    }
-    .lab-pill.hot {
-      color:      var(--accent);
-      border-color: rgba(220, 20, 60, 0.35);
-      background: rgba(220, 20, 60, 0.07);
-    }
-
-    .lab-right {
-      flex-shrink: 0;
-      display:     flex;
       flex-direction: column;
       align-items: flex-end;
-      gap:         14px;
+      gap:        10px;
     }
 
-    .lab-stats {
-      display:    flex;
-      gap:        20px;
+    /* ── SKULL BUTTON ── */
+    .skull-btn {
+      position:      relative;
+      display:       flex;
+      align-items:   center;
+      overflow:      hidden;
+      height:        44px;
+      width:         44px; /* collapses to circle */
+      border-radius: 22px;
+      cursor:        pointer;
+      border:        1px solid rgba(220,20,60,.55);
+      background:    linear-gradient(135deg, rgba(20,4,8,.92), rgba(60,6,20,.88));
+      box-shadow:    0 0 0 0 rgba(220,20,60,.0),
+                     inset 0 1px 0 rgba(255,255,255,.08);
+      padding:       0;
+      white-space:   nowrap;
+      transition:    width .35s cubic-bezier(.34,1.2,.64,1),
+                     border-color .2s,
+                     box-shadow .2s;
+      animation:     skull-idle 3s ease-in-out infinite;
     }
-    .lab-stat {
-      text-align: center;
+    .skull-btn:hover {
+      width:        210px;
+      border-color: rgba(220,20,60,.90);
+      box-shadow:   0 0 22px rgba(220,20,60,.55),
+                    0 0 52px rgba(220,20,60,.22),
+                    inset 0 1px 0 rgba(255,255,255,.12);
+      animation:    none;
     }
-    .lab-stat-val {
-      font-family: var(--mono);
-      font-size:   20px;
-      font-weight: 800;
-      color:       var(--accent);
-      display:     block;
-      line-height: 1;
-    }
-    .lab-stat-lbl {
-      font-family:    var(--mono);
-      font-size:      8px;
-      color:          var(--muted);
-      letter-spacing: 1.5px;
-      margin-top:     4px;
-      display:        block;
+    @keyframes skull-idle {
+      0%,100% { box-shadow: 0 0 8px rgba(220,20,60,.30), inset 0 1px 0 rgba(255,255,255,.08); }
+      50%      { box-shadow: 0 0 22px rgba(220,20,60,.65), 0 0 44px rgba(220,20,60,.18), inset 0 1px 0 rgba(255,255,255,.10); }
     }
 
-    .lab-cta {
-      display:         inline-flex;
+    /* Rotating ring border */
+    .skull-btn::before {
+      content:      '';
+      position:     absolute;
+      inset:        -1px;
+      border-radius: 23px;
+      background:   conic-gradient(from var(--ring-angle, 0deg), #dc143c 0%, transparent 30%, transparent 70%, #dc143c 100%);
+      opacity:      0;
+      transition:   opacity .2s;
+      z-index:      0;
+    }
+    .skull-btn:hover::before { opacity: .45; animation: ring-spin 1.8s linear infinite; }
+    @property --ring-angle { syntax: '<angle>'; initial-value: 0deg; inherits: false; }
+    @keyframes ring-spin { to { --ring-angle: 360deg; } }
+
+    /* Icon area — fixed 44×44 square, always visible */
+    .skull-icon {
+      flex-shrink:     0;
+      width:           44px;
+      height:          44px;
+      display:         flex;
       align-items:     center;
-      gap:             8px;
+      justify-content: center;
+      font-size:       20px;
+      position:        relative;
+      z-index:         1;
+      animation:       skull-jitter 5s ease-in-out infinite;
+    }
+    @keyframes skull-jitter {
+      0%,90%,100% { transform: rotate(0deg) scale(1); }
+      92%          { transform: rotate(-6deg) scale(1.1); }
+      94%          { transform: rotate(5deg) scale(1.08); }
+      96%          { transform: rotate(-3deg) scale(1.05); }
+      98%          { transform: rotate(2deg) scale(1); }
+    }
+
+    /* Label — slides in from right */
+    .skull-label {
+      font-family:    var(--mono);
+      font-size:      10px;
+      font-weight:    700;
+      letter-spacing: 1.2px;
+      color:          #fff;
+      opacity:        0;
+      transform:      translateX(-8px);
+      transition:     opacity .25s .1s, transform .25s .1s;
+      padding-right:  16px;
+      flex:           1;
+      min-width:      0;
+      position:       relative;
+      z-index:        1;
+      user-select:    none;
+    }
+    .skull-btn:hover .skull-label {
+      opacity:   1;
+      transform: translateX(0);
+    }
+
+    /* Counter badge */
+    .skull-badge {
+      position:      absolute;
+      top:           -4px;
+      right:         -4px;
+      min-width:     18px;
+      height:        18px;
+      border-radius: 9px;
+      background:    var(--accent);
+      color:         #fff;
+      font-family:   var(--mono);
+      font-size:     8px;
+      font-weight:   800;
+      display:       flex;
+      align-items:   center;
+      justify-content: center;
+      padding:       0 4px;
+      border:        1.5px solid var(--bg);
+      z-index:       2;
+      pointer-events: none;
+      transition:    transform .15s;
+      box-shadow:    0 0 8px rgba(220,20,60,.6);
+    }
+    .skull-badge.pop { animation: badge-pop .25s ease-out; }
+    @keyframes badge-pop { 0%{transform:scale(1.8);} 100%{transform:scale(1);} }
+
+    /* Press feedback */
+    .skull-btn.pressed { transform: scale(0.88) rotate(-3deg) !important; transition: transform .1s !important; }
+
+    /* ── TOAST MESSAGE — pops up above the dock ── */
+    .skull-toast {
+      position:        fixed;
+      bottom:          112px; /* above dock */
+      right:           24px;
+      max-width:       260px;
+      background:      rgba(10,4,8,.82);
+      border:          .5px solid rgba(220,20,60,.5);
+      border-radius:   10px;
+      padding:         12px 16px;
       font-family:     var(--mono);
       font-size:       11px;
-      font-weight:     700;
-      letter-spacing:  1.5px;
-      color:           #fff;
-      background:      linear-gradient(135deg, rgba(220,20,60,0.92), rgba(200,10,40,0.80));
-      padding:         11px 22px;
-      text-decoration: none;
-      border-radius:   6px;
-      border:          0.5px solid rgba(220, 20, 60, 0.55);
-      transition:      transform 0.15s, box-shadow 0.2s;
-      box-shadow:      0 4px 20px rgba(220, 20, 60, 0.28),
-                       inset 0 1px 0 rgba(255,255,255,0.10);
-      white-space:     nowrap;
+      color:           var(--text);
+      line-height:     1.7;
+      letter-spacing:  .3px;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow:      0 8px 32px rgba(0,0,0,.55), 0 0 0 .5px rgba(220,20,60,.2);
+      opacity:         0;
+      transform:       translateY(10px) scale(.96);
+      transition:      opacity .22s, transform .22s;
+      pointer-events:  none;
+      z-index:         201;
     }
-    .lab-cta:hover {
-      transform:  translateY(-2px);
-      box-shadow: 0 8px 32px rgba(220, 20, 60, 0.44),
-                  inset 0 1px 0 rgba(255,255,255,0.12);
-    }
-
-    /* Arrow icon */
-    .lab-arrow {
-      font-size:    18px;
-      color:        var(--accent);
-      opacity:      0.5;
-      transition:   opacity 0.2s, transform 0.2s;
-      user-select:  none;
-    }
-    .lab-card:hover .lab-arrow {
+    .skull-toast.visible {
       opacity:   1;
-      transform: translateX(4px);
+      transform: translateY(0) scale(1);
+    }
+    .skull-toast .st-tag {
+      font-size:      8px;
+      color:          var(--accent);
+      letter-spacing: 2px;
+      margin-bottom:  5px;
+    }
+    .skull-toast .glitch {
+      text-shadow: 1px 0 #dc143c, -1px 0 #3b82f6;
+      animation:   toast-glitch .14s steps(2) infinite;
+    }
+    @keyframes toast-glitch {
+      0%  { transform: translateX(0); }
+      50% { transform: translateX(1px); filter: blur(.3px); }
+      100%{ transform: translateX(-1px); }
     }
 
-    @media (max-width: 760px) {
-      .lab-banner  { padding: 0 20px; margin-top: 36px; }
-      .lab-body    { flex-direction: column; align-items: flex-start; padding: 22px 20px; }
-      .lab-right   { align-items: flex-start; flex-direction: row; align-items: center; flex-wrap: wrap; }
-      .lab-stats   { gap: 14px; }
-      .lab-title   { font-size: 18px; }
-      .lab-arrow   { display: none; }
+    /* ── RED FLASH OVERLAY ── */
+    .vent-flash { position:fixed;inset:0;z-index:700;pointer-events:none;background:rgba(220,20,60,.3);opacity:0; }
+    .vent-flash.active { animation: flash-blink .25s steps(1) infinite; }
+    @keyframes flash-blink { 0%{opacity:0;} 50%{opacity:1;} 100%{opacity:0;} }
+
+    /* ── SCREEN SHAKE ── */
+    body.vent-shake { animation: shake .35s linear infinite; }
+    @keyframes shake {
+      0%  {transform:translate(0,0);}
+      20% {transform:translate(-5px,4px) rotate(-.3deg);}
+      40% {transform:translate(4px,-4px) rotate(.4deg);}
+      60% {transform:translate(-4px,-3px) rotate(-.2deg);}
+      80% {transform:translate(5px,3px) rotate(.3deg);}
+      100%{transform:translate(0,0);}
+    }
+    body.vent-heavy-glitch::before { animation: bg-glitch .25s steps(2) infinite; }
+    @keyframes bg-glitch {
+      0%  { filter:hue-rotate(0deg) contrast(1); }
+      50% { filter:hue-rotate(22deg) contrast(1.35) saturate(1.5); }
+      100%{ filter:hue-rotate(-12deg) contrast(1.1); }
+    }
+
+    /* ── MELTDOWN LAYER — bouncing messages ── */
+    .vent-meltdown { position:fixed;inset:0;z-index:600;pointer-events:none;overflow:hidden; }
+    .bounce-msg {
+      position:absolute;top:0;left:0;font-family:var(--mono);font-weight:800;
+      font-size:13px;letter-spacing:1px;white-space:nowrap;
+      text-shadow:0 0 12px currentColor,0 2px 6px rgba(0,0,0,.6);
+      will-change:transform;
+    }
+    .exp-burst {
+      position:absolute;width:14px;height:14px;border-radius:50%;
+      transform:translate(-50%,-50%);pointer-events:none;
+      background:radial-gradient(circle,#fff7d6 0%,#ffb020 28%,#dc143c 55%,transparent 75%);
+      animation:burst .65s ease-out forwards;
+    }
+    @keyframes burst { 0%{transform:translate(-50%,-50%) scale(.2);opacity:1;} 100%{transform:translate(-50%,-50%) scale(18);opacity:0;} }
+
+    /* ── APOCALYPSE LAYER ── */
+    .vent-apoc {
+      position:fixed;inset:0;z-index:900;background:#000;
+      display:flex;flex-direction:column;align-items:center;justify-content:center;
+      opacity:0;pointer-events:none;transition:opacity .4s;overflow:hidden;
+    }
+    .vent-apoc.on { opacity:1;pointer-events:all; }
+    .apoc-flood { position:absolute;inset:0; }
+    .flood-word {
+      position:absolute;font-family:var(--mono);font-weight:700;font-size:11px;
+      color:#dc143c;opacity:0;letter-spacing:1px;
+      animation:flood-pop .9s ease-out forwards;
+    }
+    @keyframes flood-pop { 0%{opacity:0;transform:scale(.5);} 20%{opacity:1;transform:scale(1);} 100%{opacity:0;transform:scale(1.1);} }
+    .apoc-big {
+      font-family:var(--mono);font-weight:800;font-size:clamp(14px,2.4vw,22px);
+      color:#fff;text-align:center;max-width:700px;padding:0 24px;line-height:1.5;
+      text-shadow:0 0 20px #dc143c;z-index:2;
+    }
+    .apoc-log {
+      font-family:var(--mono);font-size:11px;color:#22c55e;white-space:pre-line;
+      z-index:2;letter-spacing:.5px;line-height:1.9;text-align:left;
+    }
+
+    /* ── VOLUME PANEL — left side, mirrored from music player ── */
+    .vol-panel {
+      position:fixed;bottom:24px;left:24px;z-index:200;
+      display:flex;align-items:center;gap:10px;
+      background:rgba(6,6,12,.62);border:.5px solid rgba(255,255,255,.12);
+      border-radius:40px;padding:8px 16px;
+      backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+      box-shadow:0 8px 28px rgba(0,0,0,.5);
+    }
+    .vol-btn {
+      width:30px;height:30px;border-radius:50%;border:none;cursor:pointer;
+      background:linear-gradient(135deg,rgba(220,20,60,.9),rgba(140,6,28,.85));
+      color:#fff;font-size:12px;display:flex;align-items:center;justify-content:center;
+    }
+    .vol-slider { width:72px;accent-color:#dc143c; }
+    .vol-sfx {
+      font-family:var(--mono);font-size:9px;color:var(--muted);
+      letter-spacing:1px;display:flex;align-items:center;gap:4px;
+      cursor:pointer;user-select:none;
+    }
+    .vol-sfx input { accent-color:#dc143c; }
+    @media(max-width:760px){
+      .vol-panel { padding:6px 10px;gap:6px;left:16px;bottom:16px; }
+      .vol-slider { width:52px; }
+      .vol-sfx span { display:none; }
+      .skull-toast { right:16px;max-width:220px; }
     }
   </style>
 </head>
@@ -228,7 +338,6 @@
       <button class="theme-toggle" id="themeToggle" title="Toggle light/dark mode" aria-label="Toggle theme">☀</button>
       <a href="https://instagram.com/a4ace_1" target="_blank" class="nav-ig">Instagram ↗</a>
     </div>
-    <!-- Mobile nav -->
     <button class="nav-hamburger" id="navHamburger" aria-label="Menu">☰</button>
   </nav>
   <div class="nav-mobile-menu" id="navMobileMenu">
@@ -240,18 +349,11 @@
 
   <!-- HERO -->
   <section class="hero">
-
-    <!-- Background video layer -->
     <video class="hero-video" id="heroVideo" autoplay muted loop playsinline preload="auto" aria-hidden="true">
       <source src="background.mp4" type="video/mp4" />
     </video>
-
-    <!-- Glassmorphism overlay sits above the video -->
     <div class="hero-glass" aria-hidden="true"></div>
-
-    <!-- Particle canvas sits above the glass -->
     <canvas class="hero-canvas" id="heroCanvas"></canvas>
-
     <div class="hero-body">
       <div class="hero-content">
         <div class="hero-tag">// BCA NOTES PORTAL · STUDENT RESOURCES</div>
@@ -260,9 +362,7 @@
           <span class="hero-outline">Organized.</span>
           <span class="hero-accessible">Accessible.</span>
         </h1>
-        <p class="hero-sub">
-          All six semesters. One place. No login, no paywall — just the notes you need to pass.
-        </p>
+        <p class="hero-sub">All six semesters. One place. No login, no paywall — just the notes you need to pass.</p>
         <div class="hero-meta">
           <span class="badge badge-live">● SEM 2 LIVE</span>
           <span class="badge badge-dim">SEM 1 · 3–6 COMING</span>
@@ -270,7 +370,6 @@
         </div>
         <a href="#semesters" class="hero-cta">Browse Semesters ↓</a>
       </div>
-
       <div class="hero-profile">
         <img src="ACE.JPEG" alt="S. Abubakar" class="profile-pic" />
         <div class="profile-info">
@@ -281,27 +380,17 @@
     </div>
   </section>
 
-  <!-- GLOWING DIVIDER -->
   <div class="hero-divider"></div>
 
-  <!-- ══════════════════════════════════════════
-       LIFE AFTER BCA BANNER
-       Placed here: first thing after the hero,
-       before notes — equal weight, not afterthought
-  ══════════════════════════════════════════ -->
+  <!-- LIFE AFTER BCA BANNER -->
   <div class="lab-banner">
     <a href="life-after-bca.html" class="lab-card" style="text-decoration:none;">
       <div class="lab-stripe"></div>
       <div class="lab-body">
         <div class="lab-left">
           <div class="lab-eyebrow">// NEW · CAREER EXPLORER</div>
-          <div class="lab-title">
-            Life After <span class="lab-accent">BCA</span>
-          </div>
-          <div class="lab-desc">
-            15 career paths. Interactive roadmaps. Personalized quiz. Job readiness score.
-            Know exactly where you're headed — and what to do next.
-          </div>
+          <div class="lab-title">Life After <span class="lab-accent">BCA</span></div>
+          <div class="lab-desc">15 career paths. Interactive roadmaps. Personalized quiz. Job readiness score. Know exactly where you're headed — and what to do next.</div>
           <div class="lab-pills">
             <span class="lab-pill hot">🔥 Roadmaps</span>
             <span class="lab-pill hot">Career Quiz</span>
@@ -310,42 +399,26 @@
             <span class="lab-pill">Free</span>
           </div>
         </div>
-
         <div class="lab-right">
           <div class="lab-stats">
-            <div class="lab-stat">
-              <span class="lab-stat-val">15</span>
-              <span class="lab-stat-lbl">CAREERS</span>
-            </div>
-            <div class="lab-stat">
-              <span class="lab-stat-val">60+</span>
-              <span class="lab-stat-lbl">STEPS</span>
-            </div>
+            <div class="lab-stat"><span class="lab-stat-val">15</span><span class="lab-stat-lbl">CAREERS</span></div>
+            <div class="lab-stat"><span class="lab-stat-val">60+</span><span class="lab-stat-lbl">STEPS</span></div>
           </div>
           <span class="lab-cta">Explore Careers ↗</span>
         </div>
-
         <div class="lab-arrow">›</div>
       </div>
     </a>
   </div>
-  <!-- ══ END LIFE AFTER BCA BANNER ══ -->
 
   <!-- SEMESTERS -->
   <main class="container" id="semesters">
     <div class="section-label">// SEMESTERS</div>
 
-    <!-- SEM 1 -->
     <div class="sem-block">
       <button class="sem-header" aria-expanded="false" data-target="sem1">
-        <div class="sem-header-left">
-          <span class="sem-num">01</span>
-          <span class="sem-title">Semester 1</span>
-        </div>
-        <div class="sem-header-right">
-          <span class="badge badge-dim">Uploading soon</span>
-          <span class="chevron">›</span>
-        </div>
+        <div class="sem-header-left"><span class="sem-num">01</span><span class="sem-title">Semester 1</span></div>
+        <div class="sem-header-right"><span class="badge badge-dim">Uploading soon</span><span class="chevron">›</span></div>
       </button>
       <div class="sem-content" id="sem1">
         <div class="resource-grid">
@@ -356,50 +429,22 @@
       </div>
     </div>
 
-    <!-- SEM 2 -->
     <div class="sem-block sem-active">
       <button class="sem-header" aria-expanded="false" data-target="sem2">
-        <div class="sem-header-left">
-          <span class="sem-num accent">02</span>
-          <span class="sem-title">Semester 2</span>
-        </div>
-        <div class="sem-header-right">
-          <span class="badge badge-live">● Live</span>
-          <span class="chevron">›</span>
-        </div>
+        <div class="sem-header-left"><span class="sem-num accent">02</span><span class="sem-title">Semester 2</span></div>
+        <div class="sem-header-right"><span class="badge badge-live">● Live</span><span class="chevron">›</span></div>
       </button>
       <div class="sem-content" id="sem2">
         <div class="resource-grid">
-          <a href="https://drive.google.com/drive/folders/1tTdPTlxSZUoxwMG5XDdi95KsIF-kfChb"
-             target="_blank" class="resource-card must-read"
-             data-modal="true"
-             data-title="Full Notes"
-             data-sem="Semester 2"
-             data-icon="📄"
-             data-desc="Complete lecture notes for all Semester 2 subjects — Data Structures, Additional English, Constitutional Values, EVS, and more."
-             data-tags="Data Structures,English,EVS,ConstitutionalValues,C++">
+          <a href="https://drive.google.com/drive/folders/1tTdPTlxSZUoxwMG5XDdi95KsIF-kfChb" target="_blank" class="resource-card must-read" data-modal="true" data-title="Full Notes" data-sem="Semester 2" data-icon="📄" data-desc="Complete lecture notes for all Semester 2 subjects — Data Structures, Additional English, Constitutional Values, EVS, and more." data-tags="Data Structures,English,EVS,ConstitutionalValues,C++">
             <span class="rc-icon">📄</span>
             <div class="rc-info"><span class="rc-title">Full Notes <span class="hot-tag">🔥</span></span><span class="rc-sub">Google Drive ↗</span></div>
           </a>
-          <a href="https://drive.google.com/drive/folders/1YSg2S32uwCUYaQ2fmH6jS9mTlrrCHk9h"
-             target="_blank" class="resource-card must-read"
-             data-modal="true"
-             data-title="Important Questions"
-             data-sem="Semester 2"
-             data-icon="❓"
-             data-desc="Curated question bank with model paper answers, 2-mark, 5-mark and 10-mark questions for exam preparation."
-             data-tags="ModelPaper,ExamPrep,QandA,ImportantTopics">
+          <a href="https://drive.google.com/drive/folders/1YSg2S32uwCUYaQ2fmH6jS9mTlrrCHk9h" target="_blank" class="resource-card must-read" data-modal="true" data-title="Important Questions" data-sem="Semester 2" data-icon="❓" data-desc="Curated question bank with model paper answers, 2-mark, 5-mark and 10-mark questions for exam preparation." data-tags="ModelPaper,ExamPrep,QandA,ImportantTopics">
             <span class="rc-icon">❓</span>
             <div class="rc-info"><span class="rc-title">Important Questions <span class="hot-tag">🔥</span></span><span class="rc-sub">Google Drive ↗</span></div>
           </a>
-          <a href="https://drive.google.com/drive/folders/1vYd3AjODfVJMLbtTXOelM4kLT3a6TjVT"
-             target="_blank" class="resource-card"
-             data-modal="true"
-             data-title="Lab Materials"
-             data-sem="Semester 2"
-             data-icon="🧪"
-             data-desc="Practical lab programs and exercises for Semester 2. Includes C++ programs, Data Structure implementations, and more."
-             data-tags="C++,Practicals,Lab,Programs">
+          <a href="https://drive.google.com/drive/folders/1vYd3AjODfVJMLbtTXOelM4kLT3a6TjVT" target="_blank" class="resource-card" data-modal="true" data-title="Lab Materials" data-sem="Semester 2" data-icon="🧪" data-desc="Practical lab programs and exercises for Semester 2. Includes C++ programs, Data Structure implementations, and more." data-tags="C++,Practicals,Lab,Programs">
             <span class="rc-icon">🧪</span>
             <div class="rc-info"><span class="rc-title">Lab Materials</span><span class="rc-sub">Google Drive ↗</span></div>
           </a>
@@ -407,66 +452,51 @@
       </div>
     </div>
 
-    <!-- SEM 3 -->
     <div class="sem-block">
       <button class="sem-header" aria-expanded="false" data-target="sem3">
         <div class="sem-header-left"><span class="sem-num">03</span><span class="sem-title">Semester 3</span></div>
         <div class="sem-header-right"><span class="badge badge-dim">Uploading soon</span><span class="chevron">›</span></div>
       </button>
       <div class="sem-content" id="sem3">
-        <div class="resource-grid">
-          <span class="resource-card disabled"><span class="rc-icon">📄</span><div class="rc-info"><span class="rc-title">Full Notes</span><span class="rc-sub">Not yet available</span></div></span>
-        </div>
+        <div class="resource-grid"><span class="resource-card disabled"><span class="rc-icon">📄</span><div class="rc-info"><span class="rc-title">Full Notes</span><span class="rc-sub">Not yet available</span></div></span></div>
       </div>
     </div>
 
-    <!-- SEM 4 -->
     <div class="sem-block">
       <button class="sem-header" aria-expanded="false" data-target="sem4">
         <div class="sem-header-left"><span class="sem-num">04</span><span class="sem-title">Semester 4</span></div>
         <div class="sem-header-right"><span class="badge badge-dim">Uploading soon</span><span class="chevron">›</span></div>
       </button>
       <div class="sem-content" id="sem4">
-        <div class="resource-grid">
-          <span class="resource-card disabled"><span class="rc-icon">📄</span><div class="rc-info"><span class="rc-title">Full Notes</span><span class="rc-sub">Not yet available</span></div></span>
-        </div>
+        <div class="resource-grid"><span class="resource-card disabled"><span class="rc-icon">📄</span><div class="rc-info"><span class="rc-title">Full Notes</span><span class="rc-sub">Not yet available</span></div></span></div>
       </div>
     </div>
 
-    <!-- SEM 5 -->
     <div class="sem-block">
       <button class="sem-header" aria-expanded="false" data-target="sem5">
         <div class="sem-header-left"><span class="sem-num">05</span><span class="sem-title">Semester 5</span></div>
         <div class="sem-header-right"><span class="badge badge-dim">Uploading soon</span><span class="chevron">›</span></div>
       </button>
       <div class="sem-content" id="sem5">
-        <div class="resource-grid">
-          <span class="resource-card disabled"><span class="rc-icon">📄</span><div class="rc-info"><span class="rc-title">Full Notes</span><span class="rc-sub">Not yet available</span></div></span>
-        </div>
+        <div class="resource-grid"><span class="resource-card disabled"><span class="rc-icon">📄</span><div class="rc-info"><span class="rc-title">Full Notes</span><span class="rc-sub">Not yet available</span></div></span></div>
       </div>
     </div>
 
-    <!-- SEM 6 -->
     <div class="sem-block">
       <button class="sem-header" aria-expanded="false" data-target="sem6">
         <div class="sem-header-left"><span class="sem-num">06</span><span class="sem-title">Semester 6</span></div>
         <div class="sem-header-right"><span class="badge badge-dim">Uploading soon</span><span class="chevron">›</span></div>
       </button>
       <div class="sem-content" id="sem6">
-        <div class="resource-grid">
-          <span class="resource-card disabled"><span class="rc-icon">📄</span><div class="rc-info"><span class="rc-title">Full Notes</span><span class="rc-sub">Not yet available</span></div></span>
-        </div>
+        <div class="resource-grid"><span class="resource-card disabled"><span class="rc-icon">📄</span><div class="rc-info"><span class="rc-title">Full Notes</span><span class="rc-sub">Not yet available</span></div></span></div>
       </div>
     </div>
-
   </main>
 
-  <!-- GAMES SECTION -->
+  <!-- GAMES -->
   <section class="container" id="games">
     <div class="section-label">// GAMES</div>
     <div class="games-grid">
-
-      <!-- Typing Speed Test -->
       <div class="game-card">
         <div class="game-card-header">
           <span class="game-title">⌨ Typing Speed Test</span>
@@ -484,8 +514,6 @@
           <span class="typing-status" id="typingStatus">timer starts on first keystroke</span>
         </div>
       </div>
-
-      <!-- BCA Quiz -->
       <div class="game-card">
         <div class="game-card-header">
           <span class="game-title">🧠 BCA Quiz</span>
@@ -504,7 +532,6 @@
           <button class="game-btn game-btn-ghost" id="quizRestart" style="display:none">↺ Restart</button>
         </div>
       </div>
-
     </div>
   </section>
 
@@ -535,13 +562,49 @@
     <span>Bengaluru</span>
   </footer>
 
-  <!-- MUSIC PLAYER -->
-  <div class="music-player" id="musicPlayer">
-    <button class="music-btn" id="music-btn" aria-label="Toggle music"><span id="music-icon">▶</span></button>
-    <span class="music-label" id="music-label">Play BGM</span>
-    <div class="music-bar" id="musicBar">
-      <span></span><span></span><span></span><span></span>
+  <!-- ════════════════════════════════════════
+       BOTTOM-RIGHT DOCK — skull + music player
+  ════════════════════════════════════════ -->
+  <div class="bottom-dock">
+
+    <!-- SKULL BUTTON -->
+    <button class="skull-btn" id="skullBtn" title="Stress relief. Click it." aria-label="I hate taking BCA">
+      <span class="skull-icon">💀</span>
+      <span class="skull-label">I HATE TAKING BCA</span>
+      <span class="skull-badge" id="skullBadge">0</span>
+    </button>
+
+    <!-- MUSIC PLAYER (moved into dock) -->
+    <div class="music-player" id="musicPlayer" style="position:relative;bottom:auto;right:auto;">
+      <button class="music-btn" id="music-btn" aria-label="Toggle music"><span id="music-icon">▶</span></button>
+      <span class="music-label" id="music-label">Play BGM</span>
+      <div class="music-bar" id="musicBar">
+        <span></span><span></span><span></span><span></span>
+      </div>
     </div>
+
+  </div>
+
+  <!-- SKULL TOAST — message reveals above dock -->
+  <div class="skull-toast" id="skullToast">
+    <div class="st-tag">// DESTROYED</div>
+    <div id="toastText"></div>
+  </div>
+
+  <!-- CHAOS OVERLAY LAYERS -->
+  <div class="vent-flash"    id="flashOverlay"></div>
+  <div class="vent-meltdown" id="meltdownLayer"></div>
+  <div class="vent-apoc"     id="apocalypseLayer">
+    <div class="apoc-flood"  id="apocalypseFlood"></div>
+    <div class="apoc-big"    id="apocalypseBigText"></div>
+    <div class="apoc-log"    id="apocalypseLoading"></div>
+  </div>
+
+  <!-- VOLUME PANEL — bottom-left -->
+  <div class="vol-panel">
+    <button class="vol-btn" id="muteBtn">🔊</button>
+    <input  type="range" class="vol-slider" id="volSlider" min="0" max="100" value="70" />
+    <label  class="vol-sfx"><input type="checkbox" id="sfxToggle" checked /><span>SFX</span></label>
   </div>
 
   <!-- RESOURCE MODAL -->
@@ -566,5 +629,242 @@
     <source src="music.mp3" type="audio/mpeg" />
   </audio>
   <script src="script.js"></script>
+
+  <!-- ════════════════════════════════════════
+       CHAOS ENGINE — fully self-contained
+  ════════════════════════════════════════ -->
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+  "use strict";
+
+  /* ── AUDIO ENGINE ── */
+  var _ctx = null, _master = null;
+  function audioSettings(){
+    try{ return Object.assign({muted:false,sfxOn:true,volume:.65}, JSON.parse(localStorage.getItem("bcaAudio")||"{}")); }
+    catch(e){ return {muted:false,sfxOn:true,volume:.65}; }
+  }
+  function saveAudio(s){ localStorage.setItem("bcaAudio",JSON.stringify(s)); applyVolume(); }
+  function applyVolume(){ if(_master) _master.gain.value = audioSettings().muted ? 0 : audioSettings().volume; }
+  function ctx(){
+    if(!_ctx){ _ctx=new (window.AudioContext||window.webkitAudioContext)(); _master=_ctx.createGain(); _master.connect(_ctx.destination); applyVolume(); }
+    if(_ctx.state==="suspended") _ctx.resume();
+    return _ctx;
+  }
+  function noise(sec){
+    var c=ctx(), b=c.createBuffer(1,Math.max(1,c.sampleRate*sec),c.sampleRate), d=b.getChannelData(0);
+    for(var i=0;i<d.length;i++) d[i]=Math.random()*2-1;
+    return b;
+  }
+  function env(g,a,peak,decay,t){ g.gain.setValueAtTime(0,t); g.gain.linearRampToValueAtTime(peak,t+a); g.gain.exponentialRampToValueAtTime(0.001,t+a+decay); }
+  function tone(f,type,dur,o){
+    o=o||{};
+    if(!audioSettings().sfxOn) return;
+    var c=ctx(),t=c.currentTime,osc=c.createOscillator(),g=c.createGain();
+    osc.type=type; osc.frequency.setValueAtTime(f,t);
+    if(o.fEnd) osc.frequency.exponentialRampToValueAtTime(o.fEnd,t+dur);
+    env(g,o.a||.01,o.p||.8,dur,t);
+    osc.connect(g); g.connect(_master); osc.start(t); osc.stop(t+dur+.05);
+  }
+  function noiseFx(dur,o){
+    o=o||{};
+    if(!audioSettings().sfxOn) return;
+    var c=ctx(),t=c.currentTime,src=c.createBufferSource();
+    src.buffer=noise(dur);
+    var f=c.createBiquadFilter(); f.type=o.ft||"lowpass"; f.frequency.value=o.ff||900;
+    var g=c.createGain(); env(g,o.a||.005,o.p||.9,dur,t);
+    src.connect(f); f.connect(g); g.connect(_master); src.start(t);
+  }
+  function sfxExplosion(){ noiseFx(.55,{ff:700,p:1}); tone(58,"sine",.5,{fEnd:28,p:.9}); }
+  function sfxVine()     { tone(48,"sine",.8,{fEnd:30,p:1,a:.01}); noiseFx(.2,{ff:380,p:.55}); }
+  function sfxMetal()    { tone(850,"square",.12,{fEnd:180,p:.5}); tone(420,"sawtooth",.18,{fEnd:110,p:.35}); }
+  function sfxBass()     { tone(400,"sine",1.1,{fEnd:25,p:1,a:.05}); noiseFx(.3,{ff:180,p:.5}); }
+  function sfxWin()      { tone(523,"square",.14,{p:.35}); setTimeout(function(){tone(392,"square",.18,{p:.35});},125); }
+  function sfxBoom()     { noiseFx(1.3,{ff:260,p:.85,a:.05}); tone(38,"sine",1.3,{fEnd:18,p:1}); }
+  function sfxBlip()     { tone(1600+Math.random()*600,"square",.026,{p:.12,a:.001}); }
+  function sfxSiren(sec){
+    sec=sec||2;
+    if(!audioSettings().sfxOn) return;
+    var c=ctx(),t=c.currentTime,osc=c.createOscillator(),g=c.createGain();
+    osc.type="sawtooth"; g.gain.value=.35; osc.connect(g); g.connect(_master);
+    var steps=Math.max(2,Math.floor(sec/.4));
+    for(var i=0;i<steps;i++) osc.frequency.setValueAtTime(i%2===0?900:660,t+i*.4);
+    osc.start(t); osc.stop(t+sec);
+  }
+  var SFX_POOL=[sfxExplosion,sfxVine,sfxMetal,sfxBass,sfxWin,sfxBoom,function(){sfxSiren(.8);}];
+  function randSfx(){ SFX_POOL[Math.floor(Math.random()*SFX_POOL.length)](); }
+
+  /* ── CONTENT ── */
+  var MESSAGES=[
+    "DBMS has been permanently deleted.",
+    "Your assignment has spontaneously combusted.",
+    "Attendance record: erased.",
+    "Internal marks set to negative infinity.",
+    "Viva rescheduled to another dimension.",
+    "The C++ compiler achieved sentience and quit.",
+    "OS lecture notes converted to binary ash.",
+    "Exam hall teleported to the moon.",
+    "Your project report turned into a haiku.",
+    "404: Semester not found.",
+    "EVS syllabus replaced with cat videos.",
+    "Professor entered stealth mode.",
+    "CGPA visited the negatives briefly.",
+    "Java OOP deprecated. Permanently.",
+    "Library WiFi password self-destructed."
+  ];
+  var MELTDOWN=[
+    "DBMS DELETED","ATTENDANCE LOST","EXAM CANCELLED","VIVA ESCAPED",
+    "404 SEMESTER NOT FOUND","ASSIGNMENT DESTROYED","INTERNAL MARKS MAXED"
+  ];
+  var APOC_LOG=[
+    "Removing DBMS...","Removing CA...","Removing PST...",
+    "Removing Assignments...","Removing Attendance..."
+  ];
+
+  function wait(ms){ return new Promise(function(r){setTimeout(r,ms);}); }
+
+  /* ── COUNTER / BADGE ── */
+  var badgeEl=document.getElementById("skullBadge");
+  function getCount(){ return parseInt(localStorage.getItem("bcaChaosCount")||"0",10); }
+  function setCount(n){ localStorage.setItem("bcaChaosCount",String(n)); updateBadge(n); }
+  function addCount(n){ setCount(getCount()+n); }
+  function updateBadge(n){
+    badgeEl.textContent = n>=1000 ? (Math.floor(n/1000))+"k" : String(n);
+    badgeEl.classList.remove("pop");
+    void badgeEl.offsetWidth;
+    badgeEl.classList.add("pop");
+  }
+  setCount(getCount());
+
+  /* ── TYPEWRITER ── */
+  var toastTextEl=document.getElementById("toastText");
+  var toastEl=document.getElementById("skullToast");
+  var toastTimer=null;
+
+  function typewriterToast(text){
+    clearTimeout(toastTimer);
+    toastTextEl.textContent="";
+    toastTextEl.classList.add("glitch");
+    toastEl.classList.add("visible");
+    var i=0;
+    var iv=setInterval(function(){
+      toastTextEl.textContent+=text[i]; sfxBlip(); i++;
+      if(i>=text.length){ clearInterval(iv); toastTextEl.classList.remove("glitch"); }
+    }, 30);
+    toastTimer=setTimeout(function(){ toastEl.classList.remove("visible"); },3800);
+  }
+
+  /* ── SCREEN EFFECTS ── */
+  function shake(dur){ document.body.classList.add("vent-shake"); setTimeout(function(){document.body.classList.remove("vent-shake");},dur); }
+  function flash(dur){ var el=document.getElementById("flashOverlay"); el.classList.add("active"); setTimeout(function(){el.classList.remove("active");},dur); }
+  function burst(x,y){
+    var b=document.createElement("div"); b.className="exp-burst";
+    b.style.left=x+"px"; b.style.top=y+"px";
+    document.getElementById("meltdownLayer").appendChild(b);
+    setTimeout(function(){b.remove();},700);
+  }
+  function bouncingMsg(text, dur){
+    dur=dur||2200;
+    var layer=document.getElementById("meltdownLayer");
+    var el=document.createElement("span"); el.className="bounce-msg"; el.textContent=text;
+    el.style.color=["#dc143c","#eab308","#3b82f6","#22c55e","#a855f7"][Math.floor(Math.random()*5)];
+    layer.appendChild(el);
+    var x=Math.random()*(window.innerWidth-200);
+    var y=Math.random()*(window.innerHeight-80);
+    var vx=(Math.random()<.5?-1:1)*(2.2+Math.random()*3.2);
+    var vy=(Math.random()<.5?-1:1)*(2.2+Math.random()*3.2);
+    var w=el.offsetWidth||150, h=el.offsetHeight||18, raf;
+    function step(){ x+=vx; y+=vy; if(x<=0||x+w>=window.innerWidth)vx*=-1; if(y<=0||y+h>=window.innerHeight)vy*=-1; el.style.transform="translate("+x+"px,"+y+"px)"; raf=requestAnimationFrame(step); }
+    step();
+    setTimeout(function(){ cancelAnimationFrame(raf); el.remove(); },dur);
+  }
+
+  /* ── MELTDOWN (10%) ── */
+  function triggerMeltdown(){
+    shake(2000); flash(2200); sfxSiren(2);
+    document.body.classList.add("vent-heavy-glitch");
+    MELTDOWN.forEach(function(m,i){ setTimeout(function(){bouncingMsg(m);},i*120); });
+    for(var i=0;i<9;i++)(function(i){ setTimeout(function(){burst(Math.random()*window.innerWidth,Math.random()*window.innerHeight);},i*200); })(i);
+    return wait(2350).then(function(){
+      document.body.classList.remove("vent-heavy-glitch");
+      document.getElementById("meltdownLayer").innerHTML="";
+      sfxExplosion(); burst(window.innerWidth/2,window.innerHeight/2);
+      return typewriterToast("💀 TOTAL ACADEMIC DESTRUCTION ACHIEVED 💀");
+    });
+  }
+
+  /* ── APOCALYPSE (1%) ── */
+  function triggerApocalypse(){
+    addCount(100);
+    var layer=document.getElementById("apocalypseLayer");
+    var flood=document.getElementById("apocalypseFlood");
+    var bigEl=document.getElementById("apocalypseBigText");
+    var logEl=document.getElementById("apocalypseLoading");
+    flood.innerHTML=""; bigEl.textContent=""; logEl.textContent="";
+    layer.classList.add("on");
+    sfxSiren(1.5); sfxBass();
+    var pool=MELTDOWN.concat(MESSAGES.map(function(m){return m.toUpperCase();}));
+    for(var i=0;i<120;i++)(function(i){
+      setTimeout(function(){
+        var s=document.createElement("span"); s.className="flood-word";
+        s.textContent=pool[Math.floor(Math.random()*pool.length)];
+        s.style.left=(Math.random()*88)+"%"; s.style.top=(Math.random()*88)+"%";
+        flood.appendChild(s); setTimeout(function(){s.remove();},900);
+      },i*20);
+    })(i);
+    return wait(2600).then(function(){
+      flood.innerHTML="";
+      return new Promise(function(res){
+        var txt="CONGRATULATIONS. YOU HAVE SUCCESSFULLY DELETED THE ENTIRE BCA DEPARTMENT.";
+        var i=0; bigEl.textContent="";
+        var iv=setInterval(function(){ bigEl.textContent+=txt[i]; sfxBlip(); i++; if(i>=txt.length){clearInterval(iv);res();} },15);
+      });
+    }).then(function(){ return wait(700); })
+    .then(function(){
+      bigEl.textContent="";
+      var p=Promise.resolve();
+      APOC_LOG.forEach(function(line){ p=p.then(function(){ logEl.textContent+=line+"\n"; sfxBlip(); return wait(420); }); });
+      return p;
+    }).then(function(){ return wait(300); })
+    .then(function(){
+      logEl.textContent+="100% COMPLETE";
+      sfxExplosion();
+      return wait(1500);
+    }).then(function(){
+      layer.classList.remove("on");
+      bigEl.textContent=""; logEl.textContent="";
+    });
+  }
+
+  /* ── SKULL BUTTON HANDLER ── */
+  var bigRunning=false;
+  document.getElementById("skullBtn").addEventListener("click",function(){
+    ctx(); addCount(1); randSfx();
+    var btn=this;
+    btn.classList.add("pressed");
+    setTimeout(function(){btn.classList.remove("pressed");},110);
+    if(bigRunning) return;
+    var roll=Math.random();
+    if(roll<.01){ bigRunning=true; triggerApocalypse().then(function(){bigRunning=false;}); }
+    else if(roll<.11){ bigRunning=true; triggerMeltdown().then(function(){bigRunning=false;}); }
+    else { typewriterToast(MESSAGES[Math.floor(Math.random()*MESSAGES.length)]); }
+  });
+
+  /* ── VOLUME CONTROLS ── */
+  var muteBtn=document.getElementById("muteBtn");
+  var volSlider=document.getElementById("volSlider");
+  var sfxToggle=document.getElementById("sfxToggle");
+  function refreshVol(){
+    var s=audioSettings();
+    muteBtn.textContent=s.muted?"🔇":"🔊";
+    sfxToggle.checked=s.sfxOn;
+    volSlider.value=Math.round(s.volume*100);
+  }
+  muteBtn.addEventListener("click",function(){ var s=audioSettings(); s.muted=!s.muted; saveAudio(s); refreshVol(); });
+  volSlider.addEventListener("input",function(){ var s=audioSettings(); s.volume=this.value/100; saveAudio(s); });
+  sfxToggle.addEventListener("change",function(){ var s=audioSettings(); s.sfxOn=this.checked; saveAudio(s); });
+  refreshVol();
+
+  }); // DOMContentLoaded
+  </script>
 </body>
 </html>
