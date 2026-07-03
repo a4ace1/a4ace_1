@@ -46,8 +46,6 @@ bca-notes-portal/
 └── README.md
 ```
 
-*(Adjust this to match your actual folder layout.)*
-
 ---
 
 ## 🚀 Getting Started
