@@ -247,6 +247,22 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 @media(prefers-reduced-motion:reduce){
   .rm-step::before,.cc-bar-fill,.insight-fill,.xp-fill,.readiness-fill{transition:none!important;}
 }
+
+/* ── MUSIC PLAYER ── */
+.music-player{position:fixed;bottom:24px;right:24px;display:flex;align-items:center;gap:10px;background:rgba(6,6,12,0.60);border:.5px solid rgba(255,255,255,0.12);border-radius:40px;padding:8px 18px 8px 8px;box-shadow:0 8px 32px rgba(0,0,0,0.50),inset 0 1px 0 rgba(255,255,255,0.07);z-index:200;transition:border-color .2s,box-shadow .2s;backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur);}
+.music-player:hover{border-color:rgba(220,20,60,0.30);}
+.music-btn{width:32px;height:32px;border-radius:50%;border:none;background:linear-gradient(135deg,rgba(220,20,60,0.90),rgba(180,10,40,0.85));color:#fff;font-size:11px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:box-shadow .2s;box-shadow:0 2px 12px rgba(220,20,60,0.35);}
+.music-btn:hover{box-shadow:0 4px 20px rgba(220,20,60,0.55);}
+.music-label{font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:1px;white-space:nowrap;}
+.music-bar{display:flex;align-items:flex-end;gap:3px;height:16px;opacity:0;transition:opacity .3s;}
+.music-bar.playing{opacity:1;}
+.music-bar span{display:block;width:2.5px;background:var(--accent);border-radius:2px;}
+.music-bar.playing span:nth-child(1){animation:bar .80s ease-in-out infinite;height:8px;}
+.music-bar.playing span:nth-child(2){animation:bar .60s ease-in-out .10s infinite;height:14px;}
+.music-bar.playing span:nth-child(3){animation:bar .90s ease-in-out .20s infinite;height:10px;}
+.music-bar.playing span:nth-child(4){animation:bar .70s ease-in-out .05s infinite;height:6px;}
+@keyframes bar{0%,100%{transform:scaleY(0.4);}50%{transform:scaleY(1.0);}}
+@media (max-width:600px){.music-player{bottom:16px;right:16px;padding:7px 13px 7px 7px;}.music-label{display:none;}}
   </style>
 </head>
 <body>
@@ -346,6 +362,18 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 <div class="back-top">
   <button class="back-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
 </div>
+
+<!-- MUSIC PLAYER -->
+<div class="music-player" id="musicPlayer">
+  <button class="music-btn" id="music-btn" aria-label="Toggle music"><span id="music-icon">▶</span></button>
+  <span class="music-label" id="music-label">Play BGM</span>
+  <div class="music-bar" id="musicBar">
+    <span></span><span></span><span></span><span></span>
+  </div>
+</div>
+<audio id="bg-music" loop>
+  <source src="music.mp3" type="audio/mpeg" />
+</audio>
 
 <script>
 "use strict";
@@ -902,6 +930,29 @@ function renderReadiness(){
 function toggleSkill(id){
   checkedSkills[id] = !checkedSkills[id];
   renderReadiness();
+}
+
+/* ══ MUSIC PLAYER ══ */
+var music = document.getElementById("bg-music");
+var mBtn  = document.getElementById("music-btn");
+var mIcon = document.getElementById("music-icon");
+var mLbl  = document.getElementById("music-label");
+var mBar  = document.getElementById("musicBar");
+
+if (music && mBtn) {
+  mBtn.addEventListener("click", function () {
+    if (music.paused) {
+      music.play().catch(function () {});
+      mIcon.textContent = "⏸";
+      mLbl.textContent  = "Now Playing";
+      mBar.classList.add("playing");
+    } else {
+      music.pause();
+      mIcon.textContent = "▶";
+      mLbl.textContent  = "Play BGM";
+      mBar.classList.remove("playing");
+    }
+  });
 }
 
 /* ══ INIT ══ */
